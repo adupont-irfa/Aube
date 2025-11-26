@@ -1,0 +1,5 @@
+{
+  "name": "Normandie Prédictions RH",
+  "description": "Plateforme de data science prédictive pour les tensions de recrutement en région Normandie (SARIMA/LSTM).",
+  "requestFramePermissions": []
+}
