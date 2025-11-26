@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { AlertTriangle, TrendingUp, Users, Activity } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
+  // Vue principale qui synthétise les tensions et indicateurs clés sur 6 mois.
   const criticalCount = MOCK_PREDICTIONS.filter(p => p.predictedTension6Months > 1.5).length;
   const avgConfidence = (MOCK_PREDICTIONS.reduce((acc, curr) => acc + curr.modelConfidence, 0) / MOCK_PREDICTIONS.length * 100).toFixed(1);
   

@@ -3,6 +3,7 @@ import { MOCK_PREDICTIONS } from '../constants';
 import { TrendingUp, TrendingDown, Minus, Search } from 'lucide-react';
 
 const Predictions: React.FC = () => {
+  // Page listant les prédictions par métier avec filtrage et indicateurs.
   const [searchTerm, setSearchTerm] = useState('');
 
   const filtered = MOCK_PREDICTIONS.filter(p => 
@@ -11,6 +12,7 @@ const Predictions: React.FC = () => {
   );
 
   const getTrendIcon = (trend: string) => {
+    // Sélectionne l’icône de tendance à afficher selon la direction du signal.
     switch (trend) {
       case 'up': return <TrendingUp className="text-red-500" size={16} />;
       case 'down': return <TrendingDown className="text-green-500" size={16} />;

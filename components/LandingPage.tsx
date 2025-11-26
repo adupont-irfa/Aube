@@ -19,7 +19,7 @@ interface Particle {
   vy: number;
 }
 
-// Internal Component for the Icon Effect
+// Composant d'icône animé qui dessine les particules en fonction de la forme demandée.
 const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string }> = ({ type, color }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,13 +27,13 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>(0);
 
-  // Define shapes as normalized coordinates (0 to 1)
+  // Génère les points normalisés qui décrivent la forme (horloge, globe ou bouclier).
   const getShapePoints = (type: string, density: number = 150): {x: number, y: number}[] => {
       const points: {x: number, y: number}[] = [];
       const cx = 0.5;
       const cy = 0.5;
       
-      // Helper to add point if unique-ish
+      // Petit utilitaire pour pousser un point dans la forme normalisée.
       const add = (x: number, y: number) => points.push({x, y});
 
       if (type === 'clock') {
@@ -78,6 +78,7 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
   };
 
   const initParticles = (width: number, height: number) => {
+      // Crée les particules et leurs positions de départ par rapport à la forme cible.
       const points = getShapePoints(type);
       const particles: Particle[] = [];
       points.forEach(pt => {
@@ -105,6 +106,7 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
   };
 
   useEffect(() => {
+      // Lance l'animation canvas et gère la transition hover/forme pour l'icône.
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -118,6 +120,7 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
       particlesRef.current = initParticles(width, height);
 
       const animate = () => {
+          // Boucle qui redessine les particules à chaque frame en fonction de l'état hover.
           ctx.clearRect(0, 0, width, height);
           
           particlesRef.current.forEach(p => {
@@ -184,6 +187,7 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
 
 
 const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
+  // Page d'accueil immersive avec animations de particules et navigation vers l'outil.
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const impactCanvasRef = useRef<HTMLCanvasElement>(null);
   const heroRef = useRef<HTMLElement>(null);
@@ -197,6 +201,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   const colors = ['#FF2D20', '#F97316', '#FB7185', '#C084FC', '#60A5FA'];
 
   const initParticles = (width: number, height: number, countModifier: number = 1, colorOverride?: string) => {
+    // Initialise une grappe de particules avec dispersion et couleurs adaptées à la section.
     const particles: Particle[] = [];
     const particleCount = (width < 768 ? 60 : 150) * countModifier; 
 
@@ -223,6 +228,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   };
 
   const updateParticles = (ctx: CanvasRenderingContext2D, particles: Particle[], width: number, height: number, mouseInteraction: boolean) => {
+    // Met à jour la position des particules (flottement ou répulsion suivant la souris).
     ctx.clearRect(0, 0, width, height);
 
     particles.forEach((p) => {
@@ -282,6 +288,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     if (!ctx) return;
 
     const handleResize = () => {
+      // Ajuste la taille du canvas aux dimensions de la section hero.
       if (heroRef.current) {
         canvas.width = heroRef.current.clientWidth;
         canvas.height = heroRef.current.clientHeight;
@@ -293,6 +300,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     handleResize();
 
     const animate = () => {
+      // Animation principale qui rafraîchit le champ de particules du hero.
       updateParticles(ctx, particlesRef.current, canvas.width, canvas.height, true);
       requestRef.current = requestAnimationFrame(animate);
     };
@@ -312,6 +320,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       if (!ctx) return;
 
       const setSize = () => {
+          // Redimensionne le canvas d'impact en fonction de son conteneur.
           if (canvas.parentElement) {
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
@@ -323,6 +332,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       setSize();
 
       const animateImpact = () => {
+          // Boucle d'animation dédiée au fond particulaire de la section impact.
           updateParticles(ctx, impactParticlesRef.current, canvas.width, canvas.height, false);
           impactRequestRef.current = requestAnimationFrame(animateImpact);
       }
@@ -335,6 +345,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Suit la position de la souris dans le hero pour animer la dispersion des particules.
     if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
         mouseRef.current = { 
@@ -345,6 +356,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   };
 
   const scrollToSection = (id: string) => {
+    // Fait défiler en douceur jusqu'à la section demandée à partir du menu.
     const element = document.getElementById(id);
     if (!element) return;
 
@@ -355,10 +367,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     let startTime: number | null = null;
 
     const easeInOutCubic = (t: number) => {
+      // Courbe d'accélération/décélération pour lisser le scroll manuel.
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     };
 
     const animation = (currentTime: number) => {
+      // Boucle d'animation qui interpole la position de scroll à chaque frame.
       if (startTime === null) startTime = currentTime;
       const timeElapsed = currentTime - startTime;
       const progress = Math.min(timeElapsed / duration, 1);

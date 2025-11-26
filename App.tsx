@@ -7,6 +7,7 @@ import Assistant from './components/Assistant';
 import LandingPage from './components/LandingPage';
 
 const App: React.FC = () => {
+  // Composant principal qui orchestre la navigation entre les sections de l'application.
   const [activeTab, setActiveTab] = useState('landing');
 
   if (activeTab === 'landing') {
@@ -14,6 +15,7 @@ const App: React.FC = () => {
   }
 
   const renderContent = () => {
+    // Sélecteur de vue qui retourne le contenu associé à l'onglet actif.
     switch (activeTab) {
       case 'dashboard': return <Dashboard />;
       case 'predictions': return <Predictions />;

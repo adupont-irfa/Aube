@@ -7,6 +7,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
+  // Menu latéral qui gère le changement d'onglet dans l'application.
   const menuItems = [
     { id: 'dashboard', label: 'Vue d\'ensemble', icon: LayoutDashboard },
     { id: 'predictions', label: 'Prédictions (6 mois)', icon: FileText },

@@ -4,6 +4,7 @@ import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadius
 import { Cpu, GitMerge, Zap } from 'lucide-react';
 
 const ModelAnalysis: React.FC = () => {
+  // Vue analytique qui compare les modèles et leurs métriques clés.
   const radarData = [
     { subject: 'Précision', A: 85, B: 92, fullMark: 100 },
     { subject: 'Stabilité', A: 98, B: 85, fullMark: 100 },
@@ -91,6 +92,7 @@ const ModelAnalysis: React.FC = () => {
 };
 
 const ActivityIcon = () => (
+    // Icône simplifiée utilisée pour symboliser le modèle baseline.
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
 )
 
