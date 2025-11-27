@@ -406,6 +406,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
             </div>
             
             <nav className="hidden lg:flex items-center space-x-8 pl-8">
+                <button onClick={() => scrollToSection('connecte')} className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest">
+                    Open Data
+                </button>
                 <button onClick={() => scrollToSection('urgence')} className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest">
                     L'Urgence
                 </button>
@@ -451,7 +454,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                
                <p className="text-xl md:text-3xl text-slate-600 max-w-3xl font-normal leading-snug mb-10">
                  <span className="text-slate-900 font-semibold">"On ne s'adapte pas, on anticipe."</span><br/>
-                 La solution prédictive pour détecter les mutations économiques 6 mois avant la crise.
+                 La solution prédictive pour détecter les mutations économiques avant la crise.
                </p>
 
                <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -487,7 +490,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       </section>
 
       {/* ------------------- SECTION 2.5: ORBITAL OPEN DATA ------------------- */}
-      <section className="px-6 md:px-12 py-32 bg-white w-full border-b border-slate-100 overflow-hidden relative">
+      <section id="connecte" className="px-6 md:px-12 py-32 bg-white w-full border-b border-slate-100 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50/50 skew-x-12 translate-x-1/4 pointer-events-none opacity-50"></div>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20 relative z-10">
            
@@ -736,10 +739,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       </section>
 
       {/* ------------------- SECTION 6: ÉQUIPE ARQ ------------------- */}
-      <section id="team" className="px-6 md:px-12 py-32 bg-[#0a0a0a] w-full text-white">
+      <section id="team" className="px-6 md:px-12 py-32 bg-white w-full text-slate-900">
           <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
-                  <span className="text-[#FF2D20] font-bold tracking-widest text-xs uppercase mb-4 block">Les Créateurs</span>
                   <h2 className="text-4xl font-extrabold tracking-tight mb-4">L'Équipe ARQ</h2>
                   <p className="text-slate-400 max-w-2xl mx-auto font-normal">
                       Trois profils complémentaires unis par la volonté de transformer la donnée publique en intelligence territoriale.
@@ -747,35 +749,35 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group text-center">
+                  <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:bg-slate-50 transition-colors group text-center shadow-sm">
                       <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-lg shadow-blue-500/20">
                           A
                       </div>
                       <h3 className="text-xl font-semibold mb-1">Arden</h3>
                       <p className="text-[#FF2D20] text-xs font-bold uppercase tracking-widest mb-4">Data Scientist</p>
-                      <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                      <p className="text-sm text-slate-600 leading-relaxed font-normal">
                           Expert en modélisation prédictive et architecture de données. Il conçoit le cœur algorithmique d'AUBE.
                       </p>
                   </div>
 
-                  <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group text-center">
+                  <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:bg-slate-50 transition-colors group text-center shadow-sm">
                       <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-lg shadow-orange-500/20">
                           R
                       </div>
                       <h3 className="text-xl font-semibold mb-1">Romain</h3>
                       <p className="text-[#FF2D20] text-xs font-bold uppercase tracking-widest mb-4">Back-end Engineer</p>
-                      <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                      <p className="text-sm text-slate-600 leading-relaxed font-normal">
                           Spécialiste des infrastructures robustes et des API. Il assure la fiabilité et la sécurité du pipeline de données.
                       </p>
                   </div>
 
-                  <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group text-center">
+                  <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:bg-slate-50 transition-colors group text-center shadow-sm">
                       <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-lg shadow-emerald-500/20">
                           Q
                       </div>
                       <h3 className="text-xl font-semibold mb-1">Quentin</h3>
                       <p className="text-[#FF2D20] text-xs font-bold uppercase tracking-widest mb-4">Front-end Lead</p>
-                      <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                      <p className="text-sm text-slate-600 leading-relaxed font-normal">
                           Designer d'interfaces intuitives. Il transforme la complexité des données en outils d'aide à la décision clairs.
                       </p>
                   </div>
