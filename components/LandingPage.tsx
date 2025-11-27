@@ -178,6 +178,54 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
   );
 };
 
+const CountUp: React.FC<{ target: number; duration?: number; prefix?: string; suffix?: string }> = ({
+  target,
+  duration = 1200,
+  prefix = '',
+  suffix = '',
+}) => {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const animate = () => {
+      const start = performance.now();
+      const step = (timestamp: number) => {
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const nextValue = Math.floor(progress * target);
+        setValue(nextValue);
+        if (progress < 1) requestAnimationFrame(step);
+        else setValue(target);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !startedRef.current) {
+          startedRef.current = true;
+          animate();
+        }
+      });
+    });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [duration, target]);
+
+  return (
+    <span ref={ref}>
+      {prefix}
+      {value}
+      {suffix}
+    </span>
+  );
+};
+
 const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   // Page d'accueil immersive avec animations de particules et navigation vers l'outil.
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -563,28 +611,36 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   <div className="group">
                       <div className="flex items-center space-x-2 mb-2">
                          <Globe className="text-slate-400 group-hover:text-blue-500 transition-colors" size={20} />
-                         <h3 className="text-3xl font-extrabold text-slate-900">100%</h3>
+                         <h3 className="text-3xl font-extrabold text-slate-900">
+                           <CountUp target={100} suffix="%" />
+                         </h3>
                       </div>
                       <p className="text-sm text-slate-500 font-semibold pl-1">Open Data & Souverain</p>
                   </div>
                   <div className="group">
                       <div className="flex items-center space-x-2 mb-2">
                          <Layers className="text-slate-400 group-hover:text-purple-500 transition-colors" size={20} />
-                         <h3 className="text-3xl font-extrabold text-slate-900">24</h3>
+                         <h3 className="text-3xl font-extrabold text-slate-900">
+                           <CountUp target={24} />
+                         </h3>
                       </div>
                       <p className="text-sm text-slate-500 font-semibold pl-1">Zones d'Emploi Couvertes</p>
                   </div>
                   <div className="group">
                       <div className="flex items-center space-x-2 mb-2">
                          <Zap className="text-slate-400 group-hover:text-[#FF2D20] transition-colors" size={20} />
-                         <h3 className="text-3xl font-extrabold text-slate-900">&lt; 24h</h3>
+                         <h3 className="text-3xl font-extrabold text-slate-900">
+                           <CountUp target={24} prefix="< " suffix="h" />
+                         </h3>
                       </div>
                       <p className="text-sm text-slate-500 font-semibold pl-1">Latence d'Actualisation</p>
                   </div>
                    <div className="group">
                       <div className="flex items-center space-x-2 mb-2">
                          <BarChart3 className="text-slate-400 group-hover:text-indigo-500 transition-colors" size={20} />
-                         <h3 className="text-3xl font-extrabold text-slate-900">1.5k+</h3>
+                        <h3 className="text-3xl font-extrabold text-slate-900">
+                          <CountUp target={1584} />
+                        </h3>
                       </div>
                       <p className="text-sm text-slate-500 font-semibold pl-1">Fiches Métiers ROME</p>
                   </div>
