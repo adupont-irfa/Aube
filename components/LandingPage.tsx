@@ -440,7 +440,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-orange-100 selection:text-orange-900 pt-24">
       
       {/* Header (Fixed) */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 h-24 flex justify-between items-center backdrop-blur-md bg-white/80 border-b border-white/50 transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 h-24 flex justify-between items-center backdrop-blur-md bg-gradient-to-b from-white via-white to-white/90 border-b border-white/50 transition-all duration-300">
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <div className="p-2 bg-gradient-to-tr from-[#FF2D20] to-[#F97316] rounded-lg shadow-lg shadow-orange-500/20">
