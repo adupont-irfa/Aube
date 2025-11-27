@@ -494,7 +494,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
 
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 text-center pointer-events-none max-w-[90rem] mx-auto w-full">
            <div className="pointer-events-auto flex flex-col items-center">
-               <h1 className="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D20] via-[#F97316] to-purple-500 pb-5 flex flex-col gap-2 leading-[1.05]">
+               <h1 className="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#5a78ff] via-[#c26bff] to-[#ff5a3c] pb-5 flex flex-col gap-2 leading-[1.05]">
                  <span>À l'aube des besoins.</span>
                </h1>
                
