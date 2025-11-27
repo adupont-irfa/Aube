@@ -188,6 +188,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   const impactRequestRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const impactParticlesRef = useRef<Particle[]>([]);
+  const sponsorLogos = [
+    { name: 'Région Normandie', url: 'https://www.normandie.fr/sites/default/files/2020-08/logo_r.normandie-paysage-cmjn_border.jpg' },
+    { name: 'DataLab', url: 'https://datalab.datanormandie.fr/sites/default/files/inline-images/logo-datalab-removebg-preview.png' },
+    { name: 'DataNormandie', url: 'https://datalab.datanormandie.fr/sites/default/files/2025-04/DataNormandie_RVB.png' },
+    { name: 'France travail', url: 'https://cdn.prod.website-files.com/62fb8a0f36526c2ef796ac67/689c5f5694b80b98e3038504_logo-france-travail-removebg-preview.webp' },
+    { name: 'Insee', url: 'https://www.insee.fr/static/img/logoInseeFr.svg' },
+    { name: 'Ministère du travail', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNCD2kbQVXobhImQe5kDUs8WJz8ulim191Q&s' },
+  ];
 
   // Palette: Strong Orange (Laravel), Bright Orange, Rose, Violet, Blue
   const colors = ['#FF2D20', '#F97316', '#FB7185', '#C084FC', '#60A5FA'];
@@ -728,8 +736,38 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           </div>
       </section>
 
-      {/* ------------------- SECTION 6: ÉQUIPE ARQ ------------------- */}
-      <section id="team" className="px-6 md:px-12 py-32 bg-white w-full text-slate-900">
+      {/* ------------------- SECTION 6: SPONSORS ------------------- */}
+      <section id="sponsors" className="px-6 md:px-12 py-16 bg-white w-full border-t border-slate-100">
+        <style>{`
+          @keyframes sponsor-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="text-center space-y-2">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400">Sponsors & partenaires</p>
+            <h2 className="text-2xl font-extrabold text-slate-900">Ils soutiennent lécosystème Open Data</h2>
+          </div>
+          <div className="relative overflow-hidden py-4">
+            <div
+              className="flex items-center gap-12 min-w-full"
+              style={{ animation: 'sponsor-marquee 28s linear infinite' }}
+            >
+              {[...sponsorLogos, ...sponsorLogos].map((logo, idx) => (
+                <div key={`${logo.name}-${idx}`} className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity">
+                  <img src={logo.url} alt={logo.name} className="h-12 w-auto object-contain grayscale" />
+                </div>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white via-white/60 to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white via-white/60 to-transparent"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------- SECTION 7: ÉQUIPE ARQ ------------------- */}
+      <section id="team" className="px-6 md:px-12 py-32 bg-slate-50 w-full text-slate-900 border-t border-slate-200">
           <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
                   <h2 className="text-4xl font-extrabold tracking-tight mb-4">L'Équipe ARQ</h2>
