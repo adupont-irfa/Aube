@@ -19,174 +19,164 @@ interface Particle {
   vy: number;
 }
 
-// Composant d'icône animé qui dessine les particules en fonction de la forme demandée.
+// Composant d'ic?ne anim? : nuage al?atoire qui se magn?tise en forme lorsqu'il est visible.
 const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string }> = ({ type, color }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const isActiveRef = useRef(false);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>(0);
 
-  // Génère les points normalisés qui décrivent la forme (horloge, globe ou bouclier).
-  const getShapePoints = (type: string, density: number = 150): {x: number, y: number}[] => {
-      const points: {x: number, y: number}[] = [];
-      const cx = 0.5;
-      const cy = 0.5;
-      
-      // Petit utilitaire pour pousser un point dans la forme normalisée.
-      const add = (x: number, y: number) => points.push({x, y});
+  const getShapePoints = (shape: string): { x: number; y: number }[] => {
+    const points: { x: number; y: number }[] = [];
+    const cx = 0.5;
+    const cy = 0.5;
+    const add = (x: number, y: number) => points.push({ x, y });
 
-      if (type === 'clock') {
-          // Circle
-          for(let i=0; i<Math.PI*2; i+=0.1) add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
-          // Hands
-          for(let i=0; i<0.25; i+=0.02) add(cx, cy - i); // Hour (Up)
-          for(let i=0; i<0.15; i+=0.02) add(cx + i, cy); // Minute (Right)
-      } 
-      else if (type === 'globe') {
-          // Circle
-          for(let i=0; i<Math.PI*2; i+=0.1) add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
-          // Equator
-          for(let i=0.15; i<0.85; i+=0.05) add(i, cy);
-          // Meridian
-          for(let i=0.15; i<0.85; i+=0.05) add(cx, i);
-          // Diagonals (approx)
-          for(let i=0; i<Math.PI*2; i+=0.3) add(cx + 0.35 * Math.cos(i) * 0.5, cy + 0.35 * Math.sin(i));
+    if (shape === 'clock') {
+      for (let i = 0; i < Math.PI * 2; i += 0.1) add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
+      for (let i = 0; i < 0.25; i += 0.02) add(cx, cy - i);
+      for (let i = 0; i < 0.15; i += 0.02) add(cx + i, cy);
+    } else if (shape === 'globe') {
+      for (let i = 0; i < Math.PI * 2; i += 0.1) add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
+      for (let i = 0.15; i < 0.85; i += 0.05) add(i, cy);
+      for (let i = 0.15; i < 0.85; i += 0.05) add(cx, i);
+      for (let i = 0; i < Math.PI * 2; i += 0.3) add(cx + 0.35 * Math.cos(i) * 0.5, cy + 0.35 * Math.sin(i));
+    } else if (shape === 'shield') {
+      for (let i = 0.25; i <= 0.75; i += 0.05) add(i, 0.25);
+      for (let i = 0.25; i <= 0.55; i += 0.05) {
+        add(0.25, i);
+        add(0.75, i);
       }
-      else if (type === 'shield') {
-          // Shield Outline
-          // Top line
-          for(let i=0.25; i<=0.75; i+=0.05) add(i, 0.25);
-          // Sides coming down
-          for(let i=0.25; i<=0.55; i+=0.05) {
-             add(0.25, i);
-             add(0.75, i);
-          }
-          // Pointy bottom
-          for(let i=0; i<=1; i+=0.05) {
-             // Bezier approx for bottom curve
-             const t = i;
-             const x = (1-t)*(1-t)*0.25 + 2*(1-t)*t*0.5 + t*t*0.75; // Quad bezier x
-             const y = (1-t)*(1-t)*0.55 + 2*(1-t)*t*0.9 + t*t*0.55; // Quad bezier y
-             add(x,y);
-          }
-          // Checkmark
-          for(let i=0; i<0.1; i+=0.02) add(0.40+i, 0.50+i);
-          for(let i=0; i<0.2; i+=0.02) add(0.50+i, 0.60-i);
+      for (let i = 0; i <= 1; i += 0.05) {
+        const t = i;
+        const x = (1 - t) * (1 - t) * 0.25 + 2 * (1 - t) * t * 0.5 + t * t * 0.75;
+        const y = (1 - t) * (1 - t) * 0.55 + 2 * (1 - t) * t * 0.9 + t * t * 0.55;
+        add(x, y);
       }
-      return points;
+      for (let i = 0; i < 0.1; i += 0.02) add(0.4 + i, 0.5 + i);
+      for (let i = 0; i < 0.2; i += 0.02) add(0.5 + i, 0.6 - i);
+    }
+    return points;
   };
 
   const initParticles = (width: number, height: number) => {
-      // Crée les particules et leurs positions de départ par rapport à la forme cible.
-      const points = getShapePoints(type);
-      const particles: Particle[] = [];
-      points.forEach(pt => {
-          const tx = pt.x * width;
-          const ty = pt.y * height;
-          // Random origin around the canvas
-          const ox = Math.random() * width;
-          const oy = Math.random() * height;
-          
-          particles.push({
-              x: ox,
-              y: oy,
-              baseX: tx,
-              baseY: ty,
-              originX: ox,
-              originY: oy,
-              size: Math.random() * 2 + 1,
-              color: color,
-              density: Math.random() * 0.5 + 0.1, // Friction factor
-              vx: (Math.random() - 0.5) * 1.5,
-              vy: (Math.random() - 0.5) * 1.5
-          });
+    const points = getShapePoints(type);
+    const particles: Particle[] = [];
+    points.forEach((pt) => {
+      const tx = pt.x * width;
+      const ty = pt.y * height;
+      const ox = Math.random() * width;
+      const oy = Math.random() * height;
+      particles.push({
+        x: ox,
+        y: oy,
+        baseX: tx,
+        baseY: ty,
+        originX: ox,
+        originY: oy,
+        size: Math.random() * 2 + 1,
+        color: color,
+        density: Math.random() * 0.5 + 0.1,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
       });
-      return particles;
+    });
+    return particles;
   };
 
   useEffect(() => {
-      // Lance l'animation canvas et gère la transition hover/forme pour l'icône.
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      
-      const width = 400;
-      const height = 400;
-      canvas.width = width;
-      canvas.height = height;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const width = 400;
+    const height = 400;
+    canvas.width = width;
+    canvas.height = height;
+    setIsActive(false);
+    isActiveRef.current = false;
+    particlesRef.current = initParticles(width, height);
 
-      particlesRef.current = initParticles(width, height);
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      particlesRef.current.forEach((p) => {
+        const clampVel = () => {
+          const max = 1.5;
+          p.vx = Math.max(-max, Math.min(max, p.vx));
+          p.vy = Math.max(-max, Math.min(max, p.vy));
+        };
 
-      const animate = () => {
-          // Boucle qui redessine les particules à chaque frame en fonction de l'état hover.
-          ctx.clearRect(0, 0, width, height);
-          
-          particlesRef.current.forEach(p => {
-              // Limite la vitesse pour éviter les sauts brusques.
-              const clampVel = () => {
-                  const max = 1.5;
-                  if (p.vx > max) p.vx = max;
-                  if (p.vx < -max) p.vx = -max;
-                  if (p.vy > max) p.vy = max;
-                  if (p.vy < -max) p.vy = -max;
-              };
+        if (isActiveRef.current) {
+          const dx = p.baseX - p.x;
+          const dy = p.baseY - p.y;
+          p.vx += dx * 0.05;
+          p.vy += dy * 0.05;
+          clampVel();
+          p.vx *= 0.92;
+          p.vy *= 0.92;
+          p.x += p.vx;
+          p.y += p.vy;
+        } else {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx += (Math.random() - 0.5) * 0.02;
+          p.vy += (Math.random() - 0.5) * 0.02;
+          clampVel();
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+          p.x += (p.originX - p.x) * 0.002;
+          p.y += (p.originY - p.y) * 0.002;
+          p.vx *= 0.985;
+          p.vy *= 0.985;
+        }
 
-              if (isHovered) {
-                  // Aimant vers la forme : attraction douce vers la position cible (shape).
-                  const dx = p.baseX - p.x;
-                  const dy = p.baseY - p.y;
-                  p.vx += dx * 0.05;
-                  p.vy += dy * 0.05;
-                  clampVel();
-                  p.vx *= 0.92;
-                  p.vy *= 0.92;
-                  p.x += p.vx;
-                  p.y += p.vy;
-              } else {
-                  // Flottement aléatoire autour de la position d'origine (nuage dispersé).
-                  p.x += p.vx;
-                  p.y += p.vy;
-                  p.vx += (Math.random() - 0.5) * 0.02;
-                  p.vy += (Math.random() - 0.5) * 0.02;
-                  clampVel();
-                  if (p.x < 0) p.x = width;
-                  if (p.x > width) p.x = 0;
-                  if (p.y < 0) p.y = height;
-                  if (p.y > height) p.y = 0;
-                  // Légère cohésion vers la position d'origine pour garder le nuage centré.
-                  p.x += (p.originX - p.x) * 0.002;
-                  p.y += (p.originY - p.y) * 0.002;
-                  p.vx *= 0.985;
-                  p.vy *= 0.985;
-              }
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
-              ctx.beginPath();
-              ctx.fillStyle = p.color;
-              ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-              ctx.fill();
-          });
+      animationRef.current = requestAnimationFrame(animate);
+    };
 
-          animationRef.current = requestAnimationFrame(animate);
-      };
-      
-      animate();
-      return () => cancelAnimationFrame(animationRef.current);
-  }, [isHovered, type, color]);
+    animate();
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [type, color]);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isActiveRef.current = entry.isIntersecting;
+          setIsActive(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -20% 0px' }
+    );
+    observer.observe(node);
+
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+      isActiveRef.current = true;
+      setIsActive(true);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-      <div 
-        ref={containerRef} 
-        className="w-[400px] h-[400px] flex items-center justify-center cursor-crosshair -my-16"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-          <canvas ref={canvasRef} className="w-[400px] h-[400px]" />
-      </div>
+    <div ref={containerRef} className="w-[400px] h-[400px] flex items-center justify-center -my-16">
+      <canvas ref={canvasRef} className="w-[400px] h-[400px]" />
+    </div>
   );
 };
-
 
 const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   // Page d'accueil immersive avec animations de particules et navigation vers l'outil.
@@ -711,7 +701,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                  {/* Card 1: Clock (Red) */}
                  <div className="p-8 flex flex-col items-center">
                      <div className="mb-6 flex justify-center">
-                         <ParticleIcon type="clock" color="#FF2D20" />
+                         <ParticleIcon type="clock" color="#0077b6" />
                      </div>
                      <h3 className="text-4xl font-extrabold text-slate-900 mb-2">+6 Mois</h3>
                      <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">D'anticipation</p>
@@ -720,7 +710,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                  {/* Card 2: Globe (Red) */}
                  <div className="p-8 flex flex-col items-center">
                      <div className="mb-6 flex justify-center">
-                         <ParticleIcon type="globe" color="#FF2D20" />
+                         <ParticleIcon type="globe" color="#FF9348" />
                      </div>
                      <h3 className="text-4xl font-extrabold text-slate-900 mb-2">Local</h3>
                      <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">Maille Zone d'Emploi</p>
@@ -729,7 +719,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                  {/* Card 3: Shield (Red) */}
                  <div className="p-8 flex flex-col items-center">
                      <div className="mb-6 flex justify-center">
-                         <ParticleIcon type="shield" color="#FF2D20" />
+                         <ParticleIcon type="shield" color="#FFD15C" />
                      </div>
                      <h3 className="text-4xl font-extrabold text-slate-900 mb-2">Stratégique</h3>
                      <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">Soutien Filières Clés</p>
