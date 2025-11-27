@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Activity, Users, Zap, Database, TrendingUp, Sun, Layers, BarChart3, Globe, Cpu, Search, Clock, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Zap, TrendingUp, Sun, Layers, BarChart3, Globe, Search, ShieldCheck } from 'lucide-react';
 
 interface LandingPageProps {
   onEnter: () => void;
@@ -243,6 +243,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
     { name: 'France travail', url: 'https://cdn.prod.website-files.com/62fb8a0f36526c2ef796ac67/689c5f5694b80b98e3038504_logo-france-travail-removebg-preview.webp' },
     { name: 'Insee', url: 'https://www.insee.fr/static/img/logoInseeFr.svg' },
     { name: 'Ministère du travail', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNCD2kbQVXobhImQe5kDUs8WJz8ulim191Q&s' },
+  ];
+  const orbitSources = [
+    { name: 'France Travail', url: sponsorLogos[3].url },
+    { name: 'Insee', url: sponsorLogos[4].url },
+    { name: 'DataNormandie', url: sponsorLogos[2].url },
+    { name: 'Région Normandie', url: sponsorLogos[0].url },
+    { name: 'DataLab', url: sponsorLogos[1].url },
+  ];
+  const orbitItems = [
+    { ...orbitSources[0], radius: 110, animation: 'animate-[spin_32s_linear_infinite]', counterAnimation: 'animate-[spin_32s_linear_infinite_reverse]' },
+    { ...orbitSources[1], radius: 150, animation: 'animate-[spin_38s_linear_infinite]', counterAnimation: 'animate-[spin_38s_linear_infinite_reverse]' },
+    { ...orbitSources[2], radius: 190, animation: 'animate-[spin_44s_linear_infinite]', counterAnimation: 'animate-[spin_44s_linear_infinite_reverse]' },
+    { ...orbitSources[3], radius: 230, animation: 'animate-[spin_50s_linear_infinite]', counterAnimation: 'animate-[spin_50s_linear_infinite_reverse]' },
+    { ...orbitSources[4], radius: 270, animation: 'animate-[spin_58s_linear_infinite]', counterAnimation: 'animate-[spin_58s_linear_infinite_reverse]' },
   ];
 
   // Palette: Strong Orange (Laravel), Bright Orange, Rose, Violet, Blue
@@ -541,9 +555,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20 relative z-10">
            
            <div className="relative w-full lg:w-1/2 aspect-square max-w-[600px] flex items-center justify-center">
-              
-              <div className="absolute w-[350px] h-[350px] rounded-full border border-slate-100"></div>
-              <div className="absolute w-[550px] h-[550px] rounded-full border border-dashed border-slate-200 opacity-50"></div>
+             
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {orbitItems.map((item, idx) => (
+                  <div
+                    key={`ring-${item.name}-${idx}`}
+                    className="absolute rounded-full border border-slate-200/70"
+                    style={{ width: `${item.radius * 2}px`, height: `${item.radius * 2}px` }}
+                  ></div>
+                ))}
+              </div>
               
               <div className="relative z-20 w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl shadow-orange-900/5 ring-8 ring-slate-50">
                   <div className="w-16 h-16 bg-gradient-to-tr from-[#FF2D20] to-[#F97316] rounded-full flex items-center justify-center">
@@ -551,51 +572,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   </div>
               </div>
 
-              <div className="absolute w-[350px] h-[350px] animate-[spin_40s_linear_infinite]">
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex flex-col items-center w-28 hover:scale-110 transition-transform duration-300 animate-[spin_40s_linear_infinite_reverse]">
-                        <div className="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center mb-2">
-                           <Database size={20} className="text-[#FF2D20]"/>
-                        </div>
-                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-tight">France Travail</span>
+              {orbitItems.map((item, idx) => (
+                <div
+                  key={`orbit-${item.name}-${idx}`}
+                  className={`absolute left-1/2 top-1/2 ${item.animation}`}
+                style={{
+                  width: `${item.radius * 2}px`,
+                  height: `${item.radius * 2}px`,
+                  marginLeft: `-${item.radius}px`,
+                  marginTop: `-${item.radius}px`,
+                }}
+              >
+                  <div className="absolute inset-0">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div className={`flex items-center justify-center w-24 h-24 hover:scale-110 transition-transform duration-300 ${item.counterAnimation}`}>
+                          <div className="w-14 h-14 flex items-center justify-center">
+                            <img src={item.url} alt={item.name} className="h-12 w-12 object-contain drop-shadow-lg" />
+                          </div>
+                      </div>
                     </div>
-                 </div>
-
-                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                    <div className="bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex flex-col items-center w-28 hover:scale-110 transition-transform duration-300 animate-[spin_40s_linear_infinite_reverse]">
-                        <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center mb-2">
-                           <Activity size={20} className="text-purple-500"/>
-                        </div>
-                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-tight">DARES</span>
-                    </div>
-                 </div>
-              </div>
-
-              <div className="absolute w-[550px] h-[550px] animate-[spin_60s_linear_infinite_reverse]">
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                     <div className="bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex flex-col items-center w-28 hover:scale-110 transition-transform duration-300 animate-[spin_60s_linear_infinite]">
-                        <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-2">
-                           <Users size={20} className="text-blue-500"/>
-                        </div>
-                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-tight">INSEE</span>
-                     </div>
-                 </div>
-
-                 <div className="absolute top-[75%] right-[6.7%] -translate-x-1/2 -translate-y-1/2">
-                    <div className="bg-white px-3 py-2 rounded-lg shadow-lg border border-slate-100 flex items-center gap-2 hover:scale-105 transition-transform animate-[spin_60s_linear_infinite]">
-                        <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                        <span className="text-[10px] font-bold text-slate-600">DataNormandie</span>
-                    </div>
-                 </div>
-
-                 <div className="absolute top-[75%] left-[6.7%] -translate-x-1/2 -translate-y-1/2">
-                     <div className="bg-white px-3 py-2 rounded-lg shadow-lg border border-slate-100 flex items-center gap-2 hover:scale-105 transition-transform animate-[spin_60s_linear_infinite]">
-                        <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                        <span className="text-[10px] font-bold text-slate-600">ROME 4.0</span>
-                    </div>
-                 </div>
-              </div>
-           </div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
            <div className="w-full lg:w-1/2 space-y-8">
               <div>
