@@ -1,42 +1,42 @@
-# Aube – Prédiction des tensions RH en Normandie
+# Aube - PrÃ©diction des tensions RH en Normandie
 
-Application React/Vite qui visualise les tensions de recrutement par zone d’emploi : tableau de bord, prédictions détaillées, analyse de modèles et landing page immersive. Un assistant local aide à parcourir la méthodologie (SARIMA, LSTM, ensemble) sans appel externe.
+Application React/Vite qui visualise les tensions de recrutement par zone d'emploi : tableau de bord, prÃ©dictions dÃ©taillÃ©es, analyse de modÃ¨les et landing page immersive. Un assistant local aide Ã  parcourir la mÃ©thodologie (SARIMA, LSTM, ensemble) sans appel externe.
 
-## Fonctionnalités principales
-- Tableau de bord synthétique (zones en tension, confiance des modèles, historique d’actualisation).
-- Liste filtrable des prédictions sur 6 mois (tendance, confiance, seuils de tension).
-- Analyse comparée des modèles (radar, bar chart) et description des métriques.
-- Assistant local (hors ligne) pour rappeler la méthodologie et le périmètre données.
-- Landing page animée mettant en avant la valeur du produit.
+## FonctionnalitÃ©s principales
+- Tableau de bord synthÃ©tique (zones en tension, confiance des modÃ¨les, historique d'actualisation).
+- Liste filtrable des prÃ©dictions sur 6 mois (tendance, confiance, seuils de tension).
+- Analyse comparÃ©e des modÃ¨les (radar, bar chart) et description des mÃ©triques.
+- Assistant local (hors ligne) pour rappeler la mÃ©thodologie et le pÃ©rimÃ¨tre donnÃ©es.
+- Landing page animÃ©e mettant en avant la valeur du produit.
 
 ## Stack
 - React 19 + Vite 6 + TypeScript
-- Recharts (visualisation), lucide-react (icônes)
+- Recharts (visualisation), lucide-react (icÃ´nes)
 - Tailwind (via CDN) pour la mise en forme rapide
 
-## Prérequis
+## PrÃ©requis
 - Node.js 18+ et npm
 
 ## Installation et lancement
-1) Installer les dépendances  
-```bash
+1) Installer les dÃ©pendances  
+````bash
 npm install
-```
-2) Démarrer le serveur de dev (port 3005)  
-```bash
+````
+2) DÃ©marrer le serveur de dev (port 3005)  
+````bash
 npm run dev
-```
+````
 
 ## Scripts utiles
-- `npm run dev` : lance le serveur de développement sur `http://localhost:3005`.
+- `npm run dev` : lance le serveur de dÃ©veloppement sur `http://localhost:3005`.
 - `npm run build` : construit la version production dans `dist/`.
 - `npm run preview` : sert le build localement pour validation.
 
-## Déploiement
+## DÃ©ploiement
 1) Construire : `npm run build`  
-2) Servir le dossier `dist/` avec le serveur statique de votre choix (Vercel, Netlify, nginx…).
+2) Servir le dossier `dist/` avec le serveur statique de votre choix (Vercel, Netlify, nginx...).
 
 ## Structure rapide
 - `App.tsx` : shell principal et navigation par onglets.
 - `components/` : vues (Dashboard, Predictions, ModelAnalysis, Assistant, LandingPage, Sidebar).
-- `constants.ts` / `types.ts` : données mock et typages.
+- `constants.ts` / `types.ts` : donnÃ©es mock et typages.

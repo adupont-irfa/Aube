@@ -10,17 +10,17 @@ export const DEPARTMENTS = [
 
 export const MOCK_PREDICTIONS: JobPrediction[] = [
   { id: '1', romeCode: 'J1506', jobTitle: 'Soins infirmiers', zone: 'Caen', currentTension: 1.4, predictedTension6Months: 1.8, trend: 'up', modelConfidence: 0.92 },
-  { id: '2', romeCode: 'M1805', jobTitle: 'Développement informatique', zone: 'Rouen', currentTension: 1.2, predictedTension6Months: 1.6, trend: 'up', modelConfidence: 0.88 },
+  { id: '2', romeCode: 'M1805', jobTitle: 'DÃ©veloppement informatique', zone: 'Rouen', currentTension: 1.2, predictedTension6Months: 1.6, trend: 'up', modelConfidence: 0.88 },
   { id: '3', romeCode: 'H1102', jobTitle: 'Management industriel', zone: 'Le Havre', currentTension: 0.8, predictedTension6Months: 0.7, trend: 'down', modelConfidence: 0.95 },
-  { id: '4', romeCode: 'K1304', jobTitle: 'Aide à domicile', zone: 'Evreux', currentTension: 1.6, predictedTension6Months: 1.9, trend: 'up', modelConfidence: 0.85 },
+  { id: '4', romeCode: 'K1304', jobTitle: 'Aide Ã  domicile', zone: 'Evreux', currentTension: 1.6, predictedTension6Months: 1.9, trend: 'up', modelConfidence: 0.85 },
   { id: '5', romeCode: 'I1301', jobTitle: 'Maintenance industrielle', zone: 'Cherbourg', currentTension: 1.1, predictedTension6Months: 1.3, trend: 'up', modelConfidence: 0.89 },
   { id: '6', romeCode: 'D1202', jobTitle: 'Restauration (Cuisine)', zone: 'Deauville', currentTension: 1.3, predictedTension6Months: 1.1, trend: 'down', modelConfidence: 0.91 },
-  { id: '7', romeCode: 'F1603', jobTitle: 'Plomberie', zone: 'Alençon', currentTension: 1.5, predictedTension6Months: 1.7, trend: 'up', modelConfidence: 0.87 },
-  { id: '8', romeCode: 'A1203', jobTitle: 'Paysagisme', zone: 'Saint-Lô', currentTension: 0.5, predictedTension6Months: 0.6, trend: 'stable', modelConfidence: 0.93 },
+  { id: '7', romeCode: 'F1603', jobTitle: 'Plomberie', zone: 'AlenÃ§on', currentTension: 1.5, predictedTension6Months: 1.7, trend: 'up', modelConfidence: 0.87 },
+  { id: '8', romeCode: 'A1203', jobTitle: 'Paysagisme', zone: 'Saint-LÃ´', currentTension: 0.5, predictedTension6Months: 0.6, trend: 'stable', modelConfidence: 0.93 },
 ];
 
 export const MODEL_METRICS: ModelMetric[] = [
-  { modelName: 'SARIMA (Baseline)', rmse: 150, mape: 12, description: 'Statistique, gestion saisonnalité' },
-  { modelName: 'LSTM (Deep Learning)', rmse: 135, mape: 9.8, description: 'Réseaux de neurones récurrents' },
-  { modelName: 'Ensemble Voting', rmse: 140, mape: 10, description: 'Combinaison pondérée (40% SARIMA, 60% LSTM)' },
+  { modelName: 'SARIMA (Baseline)', rmse: 150, mape: 12, description: 'Statistique, gestion saisonnalitÃ©' },
+  { modelName: 'LSTM (Deep Learning)', rmse: 135, mape: 9.8, description: 'RÃ©seaux de neurones rÃ©currents' },
+  { modelName: 'Ensemble Voting', rmse: 140, mape: 10, description: 'Combinaison pondÃ©rÃ©e (40% SARIMA, 60% LSTM)' },
 ];

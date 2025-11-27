@@ -8,7 +8,7 @@ const Assistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'model',
-      text: "Bonjour ! Je suis l'assistant expert du projet de prédiction des tensions RH en Normandie. Posez-moi des questions sur la méthodologie (SARIMA, LSTM), les sources de données ou les résultats.",
+      text: "Bonjour ! Je suis l'assistant expert du projet de pr?diction des tensions RH en Normandie. Posez-moi des questions sur la m?thodologie (SARIMA, LSTM), les sources de donn?es ou les r?sultats.",
       timestamp: new Date()
     }
   ]);
@@ -16,7 +16,7 @@ const Assistant: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    // Force le défilement en bas du fil après l'ajout d'un message.
+    // Force le d?filement en bas du fil apr?s l'ajout d'un message.
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -25,7 +25,7 @@ const Assistant: React.FC = () => {
   }, [messages]);
 
   const handleSend = () => {
-    // Simule une réponse locale sans appel réseau.
+    // Simule une r?ponse locale sans appel r?seau.
     if (!input.trim()) return;
 
     const userMsg: ChatMessage = { role: 'user', text: input, timestamp: new Date() };
@@ -36,7 +36,7 @@ const Assistant: React.FC = () => {
     setTimeout(() => {
       const botMsg: ChatMessage = {
         role: 'model',
-        text: "Mode hors-ligne : je synthétise les éléments connus (SARIMA, LSTM, données Dares/INSEE) sans appel externe.",
+        text: "Mode hors-ligne : je synth?tise les ?l?ments connus (SARIMA, LSTM, donn?es Dares/INSEE) sans appel externe.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botMsg]);
@@ -45,7 +45,7 @@ const Assistant: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    // Déclenche l'envoi lorsqu'on presse Entrée sans Shift.
+    // D?clenche l'envoi lorsqu'on presse Entr?e sans Shift.
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -61,7 +61,7 @@ const Assistant: React.FC = () => {
             </div>
             <div>
                 <h3 className="font-bold text-slate-800">Assistant Expert Data Science</h3>
-                <p className="text-xs text-slate-500">Mode hors-ligne, réponses internes</p>
+                <p className="text-xs text-slate-500">Mode hors-ligne, r?ponses internes</p>
             </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const Assistant: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Posez une question sur le modèle LSTM, les données Dares..."
+            placeholder="Posez une question sur le mod?le LSTM, les donn?es Dares..."
             className="flex-1 p-3 pr-12 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
           />
           <button 

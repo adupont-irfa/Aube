@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Activity, Users, Zap, Database, TrendingUp, Sun, Layers, BarChart3, Globe, Cpu, Search, Clock, ShieldCheck } from 'lucide-react';
 
 interface LandingPageProps {
@@ -19,7 +19,7 @@ interface Particle {
   vy: number;
 }
 
-// Composant d'ic?ne anim? : nuage al?atoire qui se magn?tise en forme lorsqu'il est visible.
+// Composant d'icône animée : nuage aléatoire qui se magnétise en forme lorsqu'il est visible.
 const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string }> = ({ type, color }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -409,7 +409,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                     L'Impact
                 </button>
                 <button onClick={() => scrollToSection('team')} className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest">
-                    L'Équipe
+                    LÉquipe
                 </button>
             </nav>
           </div>
@@ -443,8 +443,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                </h1>
                
                <p className="text-xl md:text-3xl text-slate-600 max-w-3xl font-normal leading-snug mb-10">
-                 <span className="text-slate-900 font-semibold">"On ne s'adapte pas, on anticipe."</span><br/>
-                 La solution prédictive pour détecter les mutations économiques avant la crise.
+                 Le potentiel de la Normandie, révélé par l'Open Data.
+
                </p>
 
                <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -624,7 +624,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                          <div className="h-4 bg-orange-100 rounded-full overflow-hidden relative">
                              <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#FF2D20] to-[#F97316] w-[40%] rounded-full animate-pulse"></div>
                          </div>
-                         <p className="text-xs text-orange-600 mt-2 font-semibold">✨ Intervention possible avant la crise</p>
+                         <p className="text-xs text-orange-600 mt-2 font-semibold">âœ¨ Intervention possible avant la crise</p>
                      </div>
                  </div>
              </div>
