@@ -124,40 +124,42 @@ const ParticleIcon: React.FC<{ type: 'clock' | 'globe' | 'shield'; color: string
           ctx.clearRect(0, 0, width, height);
           
           particlesRef.current.forEach(p => {
-              let targetX, targetY;
-              
+              // Limite la vitesse pour éviter les sauts brusques.
+              const clampVel = () => {
+                  const max = 1.5;
+                  if (p.vx > max) p.vx = max;
+                  if (p.vx < -max) p.vx = -max;
+                  if (p.vy > max) p.vy = max;
+                  if (p.vy < -max) p.vy = -max;
+              };
+
               if (isHovered) {
-                  // Move to Shape
-                  targetX = p.baseX;
-                  targetY = p.baseY;
-                  
-                  const dx = targetX - p.x;
-                  const dy = targetY - p.y;
-                  
-                  // Organic Spring physics (Slower & Smoother)
-                  p.vx += dx * 0.02; // Reduced force for slower acceleration
-                  p.vy += dy * 0.02;
-                  p.vx *= 0.92; // Higher friction for gliding stop
+                  // Aimant vers la forme : attraction douce vers la position cible (shape).
+                  const dx = p.baseX - p.x;
+                  const dy = p.baseY - p.y;
+                  p.vx += dx * 0.05;
+                  p.vy += dy * 0.05;
+                  clampVel();
+                  p.vx *= 0.92;
                   p.vy *= 0.92;
-                  
                   p.x += p.vx;
                   p.y += p.vy;
               } else {
-                  // Float Randomly (Brownian-ish) around origin
+                  // Flottement aléatoire autour de la position d'origine (nuage dispersé).
                   p.x += p.vx;
                   p.y += p.vy;
-                  
-                  // Bounce off walls (keep inside box)
-                  if (p.x < 0 || p.x > width) p.vx *= -1;
-                  if (p.y < 0 || p.y > height) p.vy *= -1;
-                  
-                  // Dampen velocity & Add subtle organic noise
-                  if (Math.abs(p.vx) < 0.2) p.vx += (Math.random()-0.5)*0.05;
-                  if (Math.abs(p.vy) < 0.2) p.vy += (Math.random()-0.5)*0.05;
-                  
-                  // Gentle friction for ambient mode
-                  p.vx *= 0.99;
-                  p.vy *= 0.99;
+                  p.vx += (Math.random() - 0.5) * 0.02;
+                  p.vy += (Math.random() - 0.5) * 0.02;
+                  clampVel();
+                  if (p.x < 0) p.x = width;
+                  if (p.x > width) p.x = 0;
+                  if (p.y < 0) p.y = height;
+                  if (p.y > height) p.y = 0;
+                  // Légère cohésion vers la position d'origine pour garder le nuage centré.
+                  p.x += (p.originX - p.x) * 0.002;
+                  p.y += (p.originY - p.y) * 0.002;
+                  p.vx *= 0.985;
+                  p.vy *= 0.985;
               }
 
               ctx.beginPath();
@@ -400,7 +402,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 </div>
                 <div className="flex flex-col leading-none">
                     <span className="text-2xl font-extrabold tracking-tight text-slate-900">AUBE</span>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">Solution ARQ</span>
                 </div>
             </div>
             
@@ -434,7 +435,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       {/* ------------------- SECTION 1: HERO ------------------- */}
       <section 
         ref={heroRef}
-        className="relative h-[calc(100vh-6rem)] flex flex-col overflow-hidden bg-white -mt-24 pt-24"
+        className="relative min-h-[110vh] flex flex-col overflow-hidden bg-white -mt-24 pt-32 pb-28"
         onMouseMove={handleMouseMove}
       >
         <canvas 
@@ -444,17 +445,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
 
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 text-center pointer-events-none max-w-[90rem] mx-auto w-full">
            <div className="pointer-events-auto flex flex-col items-center">
-               <div className="inline-flex items-center space-x-2 mb-8 px-4 py-1.5 bg-white/80 backdrop-blur-md border border-orange-100 rounded-full shadow-sm ring-1 ring-orange-50">
-                   <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF2D20]"></span>
-                    </span>
-                   <span className="text-xs font-bold text-slate-600 tracking-wider uppercase">Signaux Faibles & Open Data</span>
-               </div>
-               
-               <h1 className="text-6xl md:text-8xl font-extrabold mb-6 leading-[0.95] tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D20] via-[#F97316] to-purple-500 pb-2">
-                 À l'aube des <br/>
-                 besoins.
+               <h1 className="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D20] via-[#F97316] to-purple-500 pb-5 flex flex-col gap-2 leading-[1.05]">
+                 <span>À l'aube des besoins.</span>
                </h1>
                
                <p className="text-xl md:text-3xl text-slate-600 max-w-3xl font-normal leading-snug mb-10">
@@ -472,7 +464,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                </div>
            </div>
            
-           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50">
+           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 flex flex-col items-center animate-bounce opacity-50">
                 <span className="text-[10px] font-semibold uppercase tracking-widest mb-2">Découvrir</span>
                 <ArrowRight className="transform rotate-90" size={20} />
            </div>
@@ -558,11 +550,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
 
            <div className="w-full lg:w-1/2 space-y-8">
               <div>
-                  <div className="inline-flex items-center space-x-2 mb-6 px-3 py-1 bg-slate-100 rounded-full border border-slate-200">
-                      <Layers size={14} className="text-slate-600"/>
-                      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">Architecture de Données</span>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
                       Connecté à tout<br/> l'écosystème public.
                   </h2>
                   <p className="text-lg text-slate-600 leading-relaxed font-normal">
@@ -608,10 +596,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       <section id="urgence" className="px-6 md:px-12 py-32 bg-white w-full border-b border-slate-100">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
              <div className="w-full md:w-1/2 space-y-6">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 bg-red-50 text-[#FF2D20] rounded-full text-xs font-bold uppercase tracking-wider">
-                    <TrendingUp size={14} />
-                    <span>La Problématique</span>
-                </div>
                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
                     L'Urgence : Cesser de piloter au rétroviseur.
                 </h2>
@@ -658,10 +642,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       <section id="solution" className="px-6 md:px-12 py-32 bg-slate-50 w-full border-b border-slate-200">
            <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16">
              <div className="w-full md:w-1/2 space-y-6">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-xs font-bold uppercase tracking-wider">
-                    <Cpu size={14} />
-                    <span>La Technologie</span>
-                </div>
                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
                     La Solution : Détecter les signaux faibles.
                 </h2>
