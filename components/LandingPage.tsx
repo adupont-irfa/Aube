@@ -15,21 +15,25 @@ const TypingLine: React.FC<{
   text: string;
   className: string;
   index: number;
-}> = ({ text, className, index }) => {
+  active: boolean;
+}> = ({ text, className, index, active }) => {
   const [shownText, setShownText] = useState("");
   const [done, setDone] = useState(false);
+  const startedRef = useRef(false);
+  const frameRef = useRef<number>();
 
   useEffect(() => {
-    let timeout: number;
+    if (!active || startedRef.current) return;
+    startedRef.current = true;
     // Delay per line so they chain automatically
     const startDelay = index * 1400;
-    timeout = window.setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       let i = 0;
       const step = () => {
         setShownText(text.slice(0, i));
         i += 1;
         if (i <= text.length) {
-          requestAnimationFrame(step);
+          frameRef.current = requestAnimationFrame(step);
         } else {
           setDone(true);
         }
@@ -37,8 +41,11 @@ const TypingLine: React.FC<{
       step();
     }, startDelay);
 
-    return () => window.clearTimeout(timeout);
-  }, [index, text]);
+    return () => {
+      window.clearTimeout(timeout);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, [active, index, text]);
 
   return (
     <div
@@ -358,11 +365,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const impactCanvasRef = useRef<HTMLCanvasElement>(null);
   const heroRef = useRef<HTMLElement>(null);
+  const solutionRef = useRef<HTMLElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const requestRef = useRef<number>(0);
   const impactRequestRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const impactParticlesRef = useRef<Particle[]>([]);
+  const [solutionActive, setSolutionActive] = useState(false);
   const initParticles = (
     width: number,
     height: number,
@@ -517,6 +526,23 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       window.removeEventListener("resize", setSize);
       cancelAnimationFrame(impactRequestRef.current);
     };
+  }, []);
+  useEffect(() => {
+    const node = solutionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSolutionActive(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
   const handleMouseMove = (e: React.MouseEvent) => {
     // Suit la position de la souris dans le hero pour animer la dispersion des particules.
@@ -905,6 +931,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
       {/* ------------------- SECTION 4: LA SOLUTION ------------------- */}
       <section
         id="solution"
+        ref={solutionRef}
         className="px-6 md:px-12 py-32 bg-slate-50 w-full border-b border-slate-200"
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16">
@@ -976,6 +1003,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   text={item.text}
                   className={item.className}
                   index={idx}
+                  active={solutionActive}
                 />
               ))}
             </div>
