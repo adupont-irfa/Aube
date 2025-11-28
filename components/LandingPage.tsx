@@ -753,7 +753,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2 space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              L'Urgence : Cesser de piloter au rétroviseur.
+              Quand les signaux arrivent trop tard.
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
               Les indicateurs actuels (chômage, offres) sont descriptifs et
@@ -770,29 +770,67 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 bg-slate-50 rounded-2xl p-8 border border-slate-100 relative overflow-hidden">
+          <div className="w-full md:w-1/2 bg-white rounded-3xl p-8 border border-slate-100 relative overflow-hidden shadow-xl shadow-orange-100/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-sky-50 opacity-95"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(255,45,32,0.08),transparent_50%),radial-gradient(circle_at_76%_70%,rgba(96,165,250,0.08),transparent_45%)]"></div>
             <div className="space-y-6 relative z-10">
-              <div>
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase mb-2">
-                  <span>Approche Classique</span>
-                  <span className="text-red-500">Réactif (+3 mois)</span>
+              <style>
+                {`
+                  @keyframes card-breathe {
+                    0%, 60%, 100% { transform: scale(1); box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06); }
+                    20%, 30% { transform: scale(1.05); box-shadow: 0 18px 60px rgba(15, 23, 42, 0.13); }
+                  }
+                `}
+              </style>
+              {[
+                {
+                  icon: "trend",
+                  title: "6 à 12 mois de retard",
+                  text: "Les tensions sont détectées trop tard pour agir efficacement.",
+                },
+                {
+                  icon: "layers",
+                  title: "Formations non alignées",
+                  text: "Le temps d’adapter l’offre, la pénurie est déjà installée.",
+                },
+                {
+                  icon: "chart",
+                  title: "Impact économique fort",
+                  text: "Des entreprises freinées, des emplois non pourvus, des territoires sous tension.",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={item.title}
+                  className="flex items-center gap-4 rounded-2xl px-4 py-3 bg-white/70 backdrop-blur border border-white/60 shadow-md shadow-orange-100/40 will-change-transform animate-[card-breathe_6s_ease-in-out_infinite]"
+                  style={{
+                    boxShadow:
+                      idx === 0
+                        ? "0 12px 60px rgba(71,85,105,0.08)"
+                        : undefined,
+                    animationDelay: `${idx * 1.6}s`,
+                  }}
+                >
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-slate-100 to-white flex items-center justify-center">
+                    {item.icon === "trend" && (
+                      <TrendingUp className="text-slate-600" size={22} />
+                    )}
+                    {item.icon === "layers" && (
+                      <Layers className="text-orange-500" size={22} />
+                    )}
+                    {item.icon === "chart" && (
+                      <BarChart3 className="text-rose-500" size={22} />
+                    )}
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-extrabold uppercase text-slate-700">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-slate-500 leading-snug">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
-                <div className="h-4 bg-slate-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-slate-400 w-[80%] rounded-full opacity-50"></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase mb-2">
-                  <span>Approche AUBE</span>
-                  <span className="text-[#FF2D20]">Prédictif (-6 mois)</span>
-                </div>
-                <div className="h-4 bg-orange-100 rounded-full overflow-hidden relative">
-                  <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#FF2D20] to-[#F97316] w-[40%] rounded-full animate-pulse"></div>
-                </div>
-                <p className="text-xs text-orange-600 mt-2 font-semibold">
-                  Intervention possible avant la crise
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -805,7 +843,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16">
           <div className="w-full md:w-1/2 space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              La Solution : Détecter les signaux faibles.
+              Détecter les signaux faibles.
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
               AUBE ne se contente pas de compter les offres. Grâce au NLP
@@ -873,7 +911,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="relative z-10 max-w-7xl mx-auto text-center space-y-16">
           <div className="max-w-3xl mx-auto space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              L'Impact : Gagner du temps, c'est sauver l'emploi.
+              Gagner du temps, c'est sauver l'emploi.
             </h2>
             <p className="text-lg text-slate-600 font-normal">
               En offrant 6 à 12 mois de visibilité supplémentaire, AUBE permet
@@ -976,16 +1014,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               {
-                name: "Designer UI/UX",
+                name: "Front-end-Lead",
                 role: "Arden",
-                bio: "Créateur d’expériences claires et intuitives. Il transforme des données complexes en interfaces accessibles, efficaces et esthétiques, au service de la décision.",
+                bio: "Designer d'interfaces intuitives. Il transforme la complexité des données en outils d'aide à la décision clairs",
                 photo: "/team/Arden2.png",
                 accent: "from-blue-500",
               },
               {
-                name: "Data Engineer",
+                name: "Data Scientist",
                 role: "Romain",
-                bio: "Architecte des flux de données. Il construit des pipelines fiables, connecte les API, optimise le stockage et garantit la qualité des données utilisées par AUBE.",
+                bio: "Expert en modélisation prédictive et architecture de données. Il conçoit le coeur algorithmique d'AUBE",
                 photo: "/team/Romain2.png",
                 accent: "from-purple-500",
               },
