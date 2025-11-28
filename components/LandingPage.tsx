@@ -546,7 +546,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               onClick={() => scrollToSection("team")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              Lœquipe
+              L'équipe
             </button>
           </nav>
         </div>
@@ -986,7 +986,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 name: "Data Engineer",
                 role: "Romain",
                 bio: "Architecte des flux de données. Il construit des pipelines fiables, connecte les API, optimise le stockage et garantit la qualité des données utilisées par AUBE.",
-                photo: "/team/Romain.png",
+                photo: "/team/Romain2.png",
                 accent: "from-purple-500",
               },
               {
