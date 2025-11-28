@@ -11,6 +11,49 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+const TypingLine: React.FC<{
+  text: string;
+  className: string;
+  index: number;
+}> = ({ text, className, index }) => {
+  const [shownText, setShownText] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let timeout: number;
+    // Delay per line so they chain automatically
+    const startDelay = index * 1400;
+    timeout = window.setTimeout(() => {
+      let i = 0;
+      const step = () => {
+        setShownText(text.slice(0, i));
+        i += 1;
+        if (i <= text.length) {
+          requestAnimationFrame(step);
+        } else {
+          setDone(true);
+        }
+      };
+      step();
+    }, startDelay);
+
+    return () => window.clearTimeout(timeout);
+  }, [index, text]);
+
+  return (
+    <div
+      className={`${className} p-3 rounded transition-all duration-500 ${
+        done ? "opacity-100" : "opacity-90"
+      }`}
+    >
+      {shownText}
+      {!done && (
+        <span className="inline-block w-2 h-3 align-middle bg-current animate-pulse ml-1"></span>
+      )}
+    </div>
+  );
+};
+
 const SPONSOR_LOGOS = [
   {
     name: "Région Normandie",
@@ -906,18 +949,35 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           <div className="w-full md:w-1/2 aspect-video bg-white rounded-2xl shadow-xl border border-slate-200 p-6 flex flex-col justify-center relative overflow-hidden">
             <div className="absolute top-0 right-0 p-32 bg-purple-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
             <div className="relative z-10 space-y-3 font-mono text-xs">
-              <div className="bg-slate-50 p-3 rounded border border-slate-100 text-slate-400">
-                &gt; Analysing raw data stream...
-              </div>
-              <div className="bg-purple-50 p-3 rounded border border-purple-100 text-purple-700 font-semibold">
-                &gt; Detecting weak signal: "Hydrogen Competencies"
-              </div>
-              <div className="bg-slate-50 p-3 rounded border border-slate-100 text-slate-500">
-                &gt; Correlation found with Zone: Le Havre
-              </div>
-              <div className="bg-green-50 p-3 rounded border border-green-100 text-green-700 font-extrabold">
-                &gt; ALERT: Critical Tension Predicted (T+6M)
-              </div>
+              {[
+                {
+                  text: "> Analysing raw data stream...",
+                  className:
+                    "bg-slate-50 border border-slate-100 text-slate-400",
+                },
+                {
+                  text: '> Detecting weak signal: "Hydrogen Competencies"',
+                  className:
+                    "bg-purple-50 border border-purple-100 text-purple-700 font-semibold",
+                },
+                {
+                  text: "> Correlation found with Zone: Le Havre",
+                  className:
+                    "bg-slate-50 border border-slate-100 text-slate-500",
+                },
+                {
+                  text: "> ALERT: Critical Tension Predicted (T+6M)",
+                  className:
+                    "bg-green-50 border border-green-100 text-green-700 font-extrabold",
+                },
+              ].map((item, idx) => (
+                <TypingLine
+                  key={item.text}
+                  text={item.text}
+                  className={item.className}
+                  index={idx}
+                />
+              ))}
             </div>
           </div>
         </div>
