@@ -107,26 +107,29 @@ const ParticleIcon: React.FC<{
     const points: { x: number; y: number }[] = [];
     const cx = 0.5;
     const cy = 0.5;
-    const add = (x: number, y: number) => points.push({ x, y });
+    // Shrink clock/globe slightly so all icons match the shield footprint.
+    const scale = shape === "shield" ? 1 : 0.86;
+    const add = (x: number, y: number) =>
+      points.push({ x: cx + (x - cx) * scale, y: cy + (y - cy) * scale });
     if (shape === "clock") {
-      for (let i = 0; i < Math.PI * 2; i += 0.1)
+      for (let i = 0; i < Math.PI * 2; i += 0.08)
         add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
-      for (let i = 0; i < 0.25; i += 0.02) add(cx, cy - i);
-      for (let i = 0; i < 0.15; i += 0.02) add(cx + i, cy);
+      for (let i = 0; i < 0.25; i += 0.015) add(cx, cy - i);
+      for (let i = 0; i < 0.15; i += 0.015) add(cx + i, cy);
     } else if (shape === "globe") {
-      for (let i = 0; i < Math.PI * 2; i += 0.1)
+      for (let i = 0; i < Math.PI * 2; i += 0.08)
         add(cx + 0.35 * Math.cos(i), cy + 0.35 * Math.sin(i));
-      for (let i = 0.15; i < 0.85; i += 0.05) add(i, cy);
-      for (let i = 0.15; i < 0.85; i += 0.05) add(cx, i);
-      for (let i = 0; i < Math.PI * 2; i += 0.3)
+      for (let i = 0.15; i < 0.85; i += 0.035) add(i, cy);
+      for (let i = 0.15; i < 0.85; i += 0.035) add(cx, i);
+      for (let i = 0; i < Math.PI * 2; i += 0.25)
         add(cx + 0.35 * Math.cos(i) * 0.5, cy + 0.35 * Math.sin(i));
     } else if (shape === "shield") {
-      for (let i = 0.25; i <= 0.75; i += 0.05) add(i, 0.25);
-      for (let i = 0.25; i <= 0.55; i += 0.05) {
+      for (let i = 0.25; i <= 0.75; i += 0.035) add(i, 0.25);
+      for (let i = 0.25; i <= 0.55; i += 0.035) {
         add(0.25, i);
         add(0.75, i);
       }
-      for (let i = 0; i <= 1; i += 0.05) {
+      for (let i = 0; i <= 1; i += 0.035) {
         const t = i;
         const x =
           (1 - t) * (1 - t) * 0.25 + 2 * (1 - t) * t * 0.5 + t * t * 0.75;
@@ -134,8 +137,8 @@ const ParticleIcon: React.FC<{
           (1 - t) * (1 - t) * 0.55 + 2 * (1 - t) * t * 0.9 + t * t * 0.55;
         add(x, y);
       }
-      for (let i = 0; i < 0.1; i += 0.02) add(0.4 + i, 0.5 + i);
-      for (let i = 0; i < 0.2; i += 0.02) add(0.5 + i, 0.6 - i);
+      for (let i = 0; i < 0.1; i += 0.015) add(0.4 + i, 0.5 + i);
+      for (let i = 0; i < 0.2; i += 0.015) add(0.5 + i, 0.6 - i);
     }
     return points;
   };
@@ -154,13 +157,34 @@ const ParticleIcon: React.FC<{
         baseY: ty,
         originX: ox,
         originY: oy,
-        size: Math.random() * 2 + 1,
+        size: Math.random() * 2.4 + 1.2,
         color: color,
         density: Math.random() * 0.5 + 0.1,
         vx: (Math.random() - 0.5) * 1.5,
         vy: (Math.random() - 0.5) * 1.5,
       });
     });
+
+    // Particules d'ambiance pour mieux lire la forme (léger halo autour).
+    const scatterCount = Math.max(60, Math.floor(points.length * 0.8));
+    for (let i = 0; i < scatterCount; i++) {
+      const ox = Math.random() * width;
+      const oy = Math.random() * height;
+      particles.push({
+        x: ox,
+        y: oy,
+        baseX: ox,
+        baseY: oy,
+        originX: ox,
+        originY: oy,
+        size: Math.random() * 1.5 + 0.6,
+        color: `${color}66`,
+        density: Math.random() * 0.3 + 0.05,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+      });
+    }
+
     return particles;
   };
   useEffect(() => {
