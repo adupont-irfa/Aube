@@ -49,11 +49,18 @@ const TypingLine: React.FC<{
 
   return (
     <div
-      className={`${className} p-3 rounded transition-all duration-500 ${
+      className={`${className} px-4 py-3 sm:px-5 sm:py-4 rounded transition-all duration-500 whitespace-pre-line ${
         done ? "opacity-100" : "opacity-90"
       }`}
     >
-      {shownText}
+      {shownText.split("\n").map((line, lineIdx) => (
+        <div
+          key={`${index}-line-${lineIdx}`}
+          className={lineIdx === 0 ? "font-semibold text-slate-800" : "font-normal text-slate-700"}
+        >
+          {line}
+        </div>
+      ))}
       {!done && (
         <span className="inline-block w-2 h-3 align-middle bg-current animate-pulse ml-1"></span>
       )}
@@ -973,29 +980,39 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               </li>
             </ul>
           </div>
-          <div className="w-full md:w-1/2 aspect-video bg-white rounded-2xl shadow-xl border border-slate-200 p-6 flex flex-col justify-center relative overflow-hidden">
+          <div className="w-full md:w-1/2 bg-white rounded-2xl shadow-xl border border-slate-200 p-8 flex flex-col justify-center relative overflow-hidden">
             <div className="absolute top-0 right-0 p-32 bg-purple-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
             <div className="relative z-10 space-y-3 font-mono text-xs">
               {[
                 {
-                  text: "> Analysing raw data stream...",
+                  text:
+                    "1️⃣ Collecte automatisée\nAPI France Travail, DARES, INSEE, DataNormandie\n(Offres, compétences, territoires, tensions)",
                   className:
-                    "bg-slate-50 border border-slate-100 text-slate-400",
+                    "bg-slate-50 border border-slate-100 text-slate-700 font-semibold",
                 },
                 {
-                  text: '> Detecting weak signal: "Hydrogen Competencies"',
+                  text:
+                    "2️⃣ Analyse sémantique (NLP)\nExtraction compétences, détection tendances, évolution du vocabulaire métier",
                   className:
                     "bg-purple-50 border border-purple-100 text-purple-700 font-semibold",
                 },
                 {
-                  text: "> Correlation found with Zone: Le Havre",
+                  text:
+                    "3️⃣ Modélisation prédictive\nAnomalies, ruptures de tendance, alertes graduées",
                   className:
-                    "bg-slate-50 border border-slate-100 text-slate-500",
+                    "bg-slate-50 border border-slate-100 text-slate-600",
                 },
                 {
-                  text: "> ALERT: Critical Tension Predicted (T+6M)",
+                  text:
+                    "4️⃣ Visualisation territoriale\nCarte interactive, top métiers en mutation, zones sensibles",
                   className:
                     "bg-green-50 border border-green-100 text-green-700 font-extrabold",
+                },
+                {
+                  text:
+                    "5️⃣ Recommandations d’actions\nAlerte des OPCO, collectivités, organismes de formation",
+                  className:
+                    "bg-orange-50 border border-orange-100 text-orange-700 font-bold",
                 },
               ].map((item, idx) => (
                 <TypingLine
