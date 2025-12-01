@@ -1217,10 +1217,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
             <a href="#" className="hover:text-orange-600 transition-colors">
               Documentation Technique
             </a>
-            <a href="#" className="hover:text-orange-600 transition-colors">
+            <a
+              href="https://www.datanormandie.fr/"
+              className="hover:text-orange-600 transition-colors"
+            >
               DataNormandie
             </a>
-            <a href="#" className="hover:text-orange-600 transition-colors">
+            <a
+              href="https://github.com/adupont-irfa/Aube"
+              className="hover:text-orange-600 transition-colors"
+            >
               Github
             </a>
           </div>
