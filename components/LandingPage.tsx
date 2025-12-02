@@ -622,31 +622,31 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               onClick={() => scrollToSection("connecte")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              Open Data
+              Présentation
             </button>
             <button
               onClick={() => scrollToSection("urgence")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              L'Urgence
+              Constat
             </button>
             <button
               onClick={() => scrollToSection("solution")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              La Solution
+              Solution
             </button>
             <button
               onClick={() => scrollToSection("impact")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              L'Impact
+              Impact
             </button>
             <button
               onClick={() => scrollToSection("team")}
               className="text-xs font-bold text-slate-500 hover:text-[#FF2D20] transition-colors uppercase tracking-widest"
             >
-              L'équipe
+              Vision
             </button>
           </nav>
         </div>
@@ -656,7 +656,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         >
           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF2D20] via-[#F97316] to-purple-500 translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></div>
           <span className="relative z-10 font-semibold text-sm tracking-wide flex items-center">
-            Accéder à l'Outil <ArrowRight size={16} className="ml-2" />
+            Anticiper les tensions <ArrowRight size={16} className="ml-2" />
           </span>
         </button>
       </header>
@@ -673,17 +673,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 text-center pointer-events-none max-w-[90rem] mx-auto w-full">
           <div className="pointer-events-auto flex flex-col items-center">
             <h1 className="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#5a78ff] via-[#c26bff] to-[#ff5a3c] pb-5 flex flex-col gap-2 leading-[1.05]">
-              <span>À l'aube des besoins.</span>
+              <span>Éclairer l'avenir des territoires</span>
             </h1>
             <p className="text-xl md:text-3xl text-slate-600 max-w-3xl font-normal leading-snug mb-10">
-              Le potentiel de la Normandie, révélé par l'Open Data.
+              Voir les tensions de demain dans les données d'aujourd'hui
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <button
                 onClick={onEnter}
                 className="px-8 py-4 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/10 hover:shadow-orange-500/10"
               >
-                Explorer les Prédictions
+                Anticiper les tensions
               </button>
               <button className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-semibold hover:bg-slate-50 transition-colors">
                 Lire le Manifeste ARQ
@@ -774,14 +774,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           <div className="w-full lg:w-1/2 space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-                Connecte tout
-                <br /> l'écosystème public.
+                Les données sont là.
+                <br /> Nous les rendons lisibles et actionnables.
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed font-normal">
-                Plus besoin de chercher l'information dispersée. AUBE agrège,
-                normalise et croise en temps réel les flux de données
-                hétérogènes pour construire une vision à 360° du marché du
-                travail normand.
+                La solution Aube s'appuie sur un écosystème de données publiques et d'APIs institutionnelles, sélectionnées pour leur pertinence thématique, leur granularité géographique et leur fiabilité. L'objectif est de croiser des sources complémentaires – offres d'emploi, compétences, démographie, stocks d'emplois, formation, accessibilité territoriale – afin de construire un modèle prédictif robuste et territorialisé des tensions emploi‑formation.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-y-10 gap-x-8 pt-8 border-t border-slate-100">
@@ -834,11 +831,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                     size={20}
                   />
                   <h3 className="text-3xl font-extrabold text-slate-900">
-                    <CountUp target={1584} />
+                    <CountUp target={111807} />
                   </h3>
                 </div>
                 <p className="text-sm text-slate-500 font-semibold pl-1">
-                  Fiches Métiers ROME
+                  Projets de recrutement en Normandie
                 </p>
               </div>
             </div>
@@ -853,13 +850,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2 space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Quand les signaux arrivent trop tard.
+              Parce que les indicateurs actuels montrent les tensions trop tard.
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
-              Les indicateurs actuels (chômage, offres) sont descriptifs et
-              arrivent souvent trop tard. Les territoires et les OPCO subissent
-              les crises de recrutement au lieu de les voir venir, entraînant
-              des pénuries coûteuses pour l'économie locale.
+              Les indicateurs habituellement utilisés pour évaluer la situation du marché du travail — tels que le taux de chômage, le volume des offres d’emploi ou les déclarations officielles de tensions sur certains métiers — fournissent uniquement une lecture rétrospective. Ils repèrent les tensions et dysfonctionnements une fois que ceux-ci sont déjà bien ancrés dans le territoire.
             </p>
             <div className="pt-4">
               <div className="flex items-center gap-4 text-sm font-semibold text-slate-500">
@@ -885,18 +879,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               {[
                 {
                   icon: "trend",
-                  title: "6 à 12 mois de retard",
-                  text: "Les tensions sont détectées trop tard pour agir efficacement.",
+                  title: "18 MOIS PERDUS",
+                  text: " Entre détection d'une pénurie et ouverture d'une formation adaptée..",
                 },
                 {
                   icon: "layers",
-                  title: "Formations non alignées",
-                  text: "Le temps d’adapter l’offre, la pénurie est déjà installée.",
+                  title: "260 000 SURQUALIFIÉS",
+                  text: "Salariés normands occupant des postes sous leur niveau de qualification.",
                 },
                 {
                   icon: "chart",
-                  title: "Impact économique fort",
-                  text: "Des entreprises freinées, des emplois non pourvus, des territoires sous tension.",
+                  title: "53% DE POSTES DIFFICILES",
+                  text: "Plus de la moitié des recrutements en tension en Normandie.",
                 },
               ].map((item, idx) => (
                 <div
@@ -944,14 +938,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16">
           <div className="w-full md:w-1/2 space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Détecter les signaux faibles.
+              Anticiper les besoins en compétences par l'analyse des signaux faibles
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
-              AUBE ne se contente pas de compter les offres. Grâce au NLP
-              (Traitement du Langage Naturel), nous analysons le contenu
-              sémantique des offres pour détecter les micro-changements de
-              compétences demandées, annonciateurs de grandes mutations
-              sectorielles.
+              Aube répond précisément à ce besoin en offrant une capacité prédictive et territorialement ciblée. Elle permet aux acteurs régionaux d’identifier en amont les signes avant-coureurs de tensions sur le marché de l’emploi et sur l’adéquation entre formations et besoins.
             </p>
             <ul className="space-y-4 pt-4">
               <li className="flex items-start space-x-3">
@@ -959,7 +949,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   <ShieldCheck size={12} className="text-white" />
                 </div>
                 <span className="text-slate-700 font-medium">
-                  Analyse sémantique de millions d'offres (France Travail)
+                  Analyse sémantique massive du marché
                 </span>
               </li>
               <li className="flex items-start space-x-3">
@@ -967,7 +957,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   <Search size={12} className="text-white" />
                 </div>
                 <span className="text-slate-700 font-medium">
-                  Identification des compétences émergentes
+                  Radar des compétences émergentes
                 </span>
               </li>
               <li className="flex items-start space-x-3">
@@ -975,7 +965,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                   <TrendingUp size={12} className="text-white" />
                 </div>
                 <span className="text-slate-700 font-medium">
-                  Modèles prédictifs hybrides (SARIMA + LSTM)
+                  Intelligence prédictive hybride
                 </span>
               </li>
             </ul>
@@ -986,31 +976,31 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               {[
                 {
                   text:
-                    "1️⃣ Collecte automatisée\nAPI France Travail, DARES, INSEE, DataNormandie\n(Offres, compétences, territoires, tensions)",
+                    "Toutes les données essentielles, réunies en continu.\nFrance Travail, DARES, INSEE et DataNormandie pour construire une base riche :\noffres, compétences, territoires, tensions, évolutions sectorielles…",
                   className:
                     "bg-slate-50 border border-slate-100 text-slate-700 font-semibold",
                 },
                 {
                   text:
-                    "2️⃣ Analyse sémantique (NLP)\nExtraction compétences, détection tendances, évolution du vocabulaire métier",
+                    "Comprendre ce que disent vraiment les offres d’emploi.\nGrâce au traitement automatique du langage, les compétences sont extraites, les tendances détectées et l’évolution des vocabulaires métiers suivie en temps réel.",
                   className:
                     "bg-purple-50 border border-purple-100 text-purple-700 font-semibold",
                 },
                 {
                   text:
-                    "3️⃣ Modélisation prédictive\nAnomalies, ruptures de tendance, alertes graduées",
+                    "Détecter les tensions avant qu’elles ne deviennent critiques.\nDes modèles hybrides combinant SARIMA & LSTM identifient anomalies, ruptures de tendance et alertes graduées.",
                   className:
                     "bg-slate-50 border border-slate-100 text-slate-600",
                 },
                 {
                   text:
-                    "4️⃣ Visualisation territoriale\nCarte interactive, top métiers en mutation, zones sensibles",
+                    "Voir instantanément ce qui se passe sur chaque territoire.\nUne carte interactive met en lumière les métiers en mutation, les zones sensibles et les dynamiques locales.",
                   className:
                     "bg-green-50 border border-green-100 text-green-700 font-extrabold",
                 },
                 {
                   text:
-                    "5️⃣ Recommandations d’actions\nAlerte des OPCO, collectivités, organismes de formation",
+                    "Des réponses concrètes, exploitables immédiatement.\nAlerte OPCO, collectivités et organismes de formation sur les métiers sensibles, les compétences à renforcer et les priorités à court terme.",
                   className:
                     "bg-orange-50 border border-orange-100 text-orange-700 font-bold",
                 },
@@ -1040,12 +1030,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="relative z-10 max-w-7xl mx-auto text-center space-y-16">
           <div className="max-w-3xl mx-auto space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-              Gagner du temps, c'est sauver l'emploi.
+              À l'aube, on voit ce que les autres ne verront qu'au grand jour.
             </h2>
             <p className="text-lg text-slate-600 font-normal">
-              En offrant 6 à 12 mois de visibilité supplémentaire, AUBE permet
-              aux acteurs publics d'aligner l'offre de formation avant que la
-              pénurie ne devienne critique.
+              AUBE vous offre ce que les autres n’ont pas : 6 à 12 mois de visibilité supplémentaire pour anticiper les besoins en compétences, ajuster vos formations et agir avant que la pénurie ne frappe réellement votre territoire. Grâce à une analyse massive et prédictive, vous transformez les signaux faibles en décisions rapides, concrètes et mesurables.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1055,10 +1043,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 <ParticleIcon type="clock" color="#0077b6" />
               </div>
               <h3 className="text-4xl font-extrabold text-slate-900 mb-2">
-                +6 Mois
+                Anticipation
               </h3>
               <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">
-                D'anticipation
+                Détection précoce des tensions emploi
               </p>
             </div>
             {/* Card 2: Globe (Red) */}
@@ -1067,10 +1055,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 <ParticleIcon type="globe" color="#FF9348" />
               </div>
               <h3 className="text-4xl font-extrabold text-slate-900 mb-2">
-                Local
+                Territorialité
               </h3>
               <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">
-                Maille Zone d'Emploi
+                Indicateurs localisés et fiables
               </p>
             </div>
             {/* Card 3: Shield (Red) */}
@@ -1079,10 +1067,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 <ParticleIcon type="shield" color="#FFD15C" />
               </div>
               <h3 className="text-4xl font-extrabold text-slate-900 mb-2">
-                Stratégique
+                Soutien
               </h3>
               <p className="text-sm font-bold text-slate-500 uppercase tracking-wide">
-                Soutien Filières Clés
+                Renforcement des secteurs prioritaires
               </p>
             </div>
           </div>
@@ -1131,13 +1119,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold tracking-tight mb-4">
-              L'équipe ARQ
+              La vision de ARQ
             </h2>
             <p className="text-slate-500 max-w-2xl mx-auto font-normal">
-              Nous sommes trois passionnés de data et d’innovation, fiers de
-              contribuer à l’avenir de notre région. Avec AUBE, nous voulons
-              aider la Normandie à anticiper ses mutations, soutenir ses
-              filières et rester un territoire d’opportunités pour tous.
+              Nous mettons la data et l’innovation au service des territoires.<br></br>
+              Notre ambition : permettre à la Normandie d’anticiper ses mutations, de renforcer ses filières clés et d’offrir à chacun de réelles opportunités d’emploi.
+              <br></br>AUBE est né de cette conviction : mieux comprendre aujourd’hui pour mieux agir demain.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -1145,21 +1132,21 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               {
                 name: "Front-end-Lead",
                 role: "Arden",
-                bio: "Designer d'interfaces intuitives. Il transforme la complexité des données en outils d'aide à la décision clairs",
+                bio: "Il conçoit des interfaces claires et intuitives pour rendre l'information accessible. Grâce à lui, les décideurs disposent d'un outil lisible, simple à prendre en main et pensé pour accélérer l'action.",
                 photo: "/team/Arden2.png",
                 accent: "from-blue-500",
               },
               {
                 name: "Data Scientist",
                 role: "Romain",
-                bio: "Expert en modélisation prédictive et architecture de données. Il conçoit le coeur algorithmique d'AUBE",
+                bio: "Il développe les modèles prédictifs. Son objectif : fournir des analyses fiables, anticipatives et exploitables pour éclairer les politiques de formation et d'emploi.",
                 photo: "/team/Romain2.png",
                 accent: "from-purple-500",
               },
               {
                 name: "Développeur Back-end",
                 role: "Quentin",
-                bio: "Spécialiste des services et de la logique applicative. Il conçoit les API, sécurise les traitements et assure la performance du cœur fonctionnel d’AUBE.",
+                bio: "Il assure la solidité, la sécurité et la performance du système. Il met en place les architectures et API qui garantissent un traitement de données robuste et une plateforme durable.",
                 photo: "/team/Quentin.png",
                 accent: "from-orange-500",
               },
