@@ -1,18 +1,22 @@
-import React from 'react';
-import { MOCK_PREDICTIONS } from '../constants';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { AlertTriangle, TrendingUp, Users, Activity } from 'lucide-react';
+import React from "react";
+import { MOCK_PREDICTIONS } from "../constants";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { AlertTriangle, TrendingUp, Users, Activity } from "lucide-react";
 
 const Dashboard: React.FC = () => {
-  // Vue principale qui synthétise les tensions et indicateurs clés sur 6 mois.
-  const criticalCount = MOCK_PREDICTIONS.filter(p => p.predictedTension6Months > 1.5).length;
-  const avgConfidence = (MOCK_PREDICTIONS.reduce((acc, curr) => acc + curr.modelConfidence, 0) / MOCK_PREDICTIONS.length * 100).toFixed(1);
-  
-  const chartData = MOCK_PREDICTIONS.map(p => ({
+  // Vue principale qui synthetise les tensions et indicateurs clefs sur 6 mois.
+  const criticalCount = MOCK_PREDICTIONS.filter((p) => p.predictedTension6Months > 1.5).length;
+  const avgConfidence = (
+    (MOCK_PREDICTIONS.reduce((acc, curr) => acc + curr.modelConfidence, 0) / MOCK_PREDICTIONS.length) * 100
+  ).toFixed(1);
+
+  const chartData = MOCK_PREDICTIONS.map((p) => ({
     name: p.zone,
     tension: p.predictedTension6Months,
-    job: p.jobTitle
-  })).sort((a, b) => b.tension - a.tension).slice(0, 6); // Top 6 critical
+    job: p.jobTitle,
+  }))
+    .sort((a, b) => b.tension - a.tension)
+    .slice(0, 6); // Top 6 critical
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -20,27 +24,27 @@ const Dashboard: React.FC = () => {
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Métiers en Tension Critique</p>
+              <p className="text-sm font-medium text-slate-500">Metiers en Tension Critique</p>
               <h3 className="text-3xl font-bold text-red-600 mt-2">{criticalCount}</h3>
             </div>
             <div className="p-3 bg-red-50 rounded-lg">
               <AlertTriangle className="text-red-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Prévision à +6 mois</p>
+          <p className="text-xs text-slate-400 mt-2">Prevision +6 mois</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Confiance Modèle (Ensemble)</p>
+              <p className="text-sm font-medium text-slate-500">Confiance Modele (Ensemble)</p>
               <h3 className="text-3xl font-bold text-blue-600 mt-2">{avgConfidence}%</h3>
             </div>
             <div className="p-3 bg-blue-50 rounded-lg">
               <Activity className="text-blue-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Pondération: LSTM 60% / SARIMA 40%</p>
+          <p className="text-xs text-slate-400 mt-2">Ponderation: LSTM 60% / SARIMA 40%</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
@@ -53,7 +57,7 @@ const Dashboard: React.FC = () => {
               <Users className="text-slate-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Couverture Région Normandie</p>
+          <p className="text-xs text-slate-400 mt-2">Couverture Region Normandie</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
@@ -78,14 +82,14 @@ const Dashboard: React.FC = () => {
               <BarChart data={chartData} layout="vertical" margin={{ left: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
                 <XAxis type="number" domain={[0, 2.5]} />
-                <YAxis dataKey="zone" type="category" width={100} tick={{fontSize: 12}} />
-                <Tooltip 
-                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  cursor={{fill: 'transparent'}}
+                <YAxis dataKey="zone" type="category" width={100} tick={{ fontSize: 12 }} />
+                <Tooltip
+                  contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                  cursor={{ fill: "transparent" }}
                 />
                 <Bar dataKey="tension" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={30}>
                   {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.tension > 1.5 ? '#ef4444' : '#3b82f6'} />
+                    <Cell key={`cell-${index}`} fill={entry.tension > 1.5 ? "#ef4444" : "#3b82f6"} />
                   ))}
                 </Bar>
               </BarChart>
@@ -94,15 +98,15 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <h3 className="text-lg font-bold text-slate-800 mb-4">Dernière Mise à Jour</h3>
+          <h3 className="text-lg font-bold text-slate-800 mb-4">Derniere Mise a Jour</h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
               <span className="text-slate-500 text-sm">France Travail API</span>
-              <span className="text-green-600 text-xs font-semibold px-2 py-1 bg-green-50 rounded-full">En temps réel</span>
+              <span className="text-green-600 text-xs font-semibold px-2 py-1 bg-green-50 rounded-full">En temps reel</span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
               <span className="text-slate-500 text-sm">Dares Indicateurs</span>
-              <span className="text-orange-600 text-xs font-semibold px-2 py-1 bg-orange-50 rounded-full">Lag 90j (Estimé)</span>
+              <span className="text-orange-600 text-xs font-semibold px-2 py-1 bg-orange-50 rounded-full">Lag 90j (Estime)</span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
               <span className="text-slate-500 text-sm">INSEE Stats</span>
@@ -111,7 +115,7 @@ const Dashboard: React.FC = () => {
             <div className="mt-6 p-4 bg-slate-50 rounded-lg">
               <p className="text-xs text-slate-500 mb-2 font-semibold">NOTE TECHNIQUE</p>
               <p className="text-xs text-slate-400">
-                Les indicateurs Dares sont interpolés mensuellement pour alimenter le modèle Ensemble (Voting).
+                Les indicateurs Dares sont interpoles mensuellement pour alimenter le modele Ensemble (Voting).
               </p>
             </div>
           </div>
