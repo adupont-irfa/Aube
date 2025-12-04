@@ -136,6 +136,7 @@ const ORBIT_ITEMS = [
 const PARTICLE_COLORS = ["#FF2D20", "#F97316", "#FB7185", "#C084FC", "#60A5FA"];
 interface LandingPageProps {
   onEnter: () => void;
+  onOpenManifest: () => void;
 }
 interface Particle {
   x: number;
@@ -367,7 +368,7 @@ const CountUp: React.FC<{
     </span>
   );
 };
-const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) => {
   // Page d'accueil immersive avec animations de particules et navigation vers l'outil.
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const impactCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -685,7 +686,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
               >
                 Anticiper les tensions
               </button>
-              <button className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-semibold hover:bg-slate-50 transition-colors">
+              <button
+                onClick={onOpenManifest}
+                className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-semibold hover:bg-slate-50 transition-colors"
+              >
                 Lire le Manifeste ARQ
               </button>
             </div>
@@ -1231,9 +1235,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
             <span>Propulsé par ARQ</span>
           </div>
           <div className="flex space-x-8">
-            <a href="#" className="hover:text-orange-600 transition-colors">
-              Documentation Technique
-            </a>
+            <button
+              onClick={() => onOpenManifest()}
+              className="hover:text-orange-600 transition-colors"
+            >
+              DOCUMENTATION TECHNIQUE
+            </button>
             <a
               href="https://www.datanormandie.fr/"
               className="hover:text-orange-600 transition-colors"

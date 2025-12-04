@@ -6,6 +6,7 @@ import ModelAnalysis from "./components/ModelAnalysis";
 import Assistant from "./components/Assistant";
 import LandingPage from "./components/LandingPage";
 import LoadingScreen from "./components/LoadingScreen";
+import Manifest from "./components/Manifest";
 
 const App: React.FC = () => {
   // Composant principal qui orchestre la navigation entre les sections de l'application.
@@ -13,11 +14,25 @@ const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   if (activeTab === "landing") {
-    return <LandingPage onEnter={() => setActiveTab("loading")} />;
+    return (
+      <LandingPage
+        onEnter={() => setActiveTab("loading")}
+        onOpenManifest={() => setActiveTab("manifest")}
+      />
+    );
   }
 
   if (activeTab === "loading") {
     return <LoadingScreen onComplete={() => setActiveTab("dashboard")} />;
+  }
+
+  if (activeTab === "manifest") {
+    return (
+      <Manifest
+        onBackToLanding={() => setActiveTab("landing")}
+        onEnterApp={() => setActiveTab("loading")}
+      />
+    );
   }
 
   const renderContent = () => {
