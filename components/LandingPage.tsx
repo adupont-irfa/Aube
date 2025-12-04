@@ -86,10 +86,6 @@ const SPONSOR_LOGOS = [
     url: "https://cdn.prod.website-files.com/62fb8a0f36526c2ef796ac67/689c5f5694b80b98e3038504_logo-france-travail-removebg-preview.webp",
   },
   { name: "Insee", url: "https://www.insee.fr/static/img/logoInseeFr.svg" },
-  {
-    name: "Ministère du travail",
-    url: "https://encrypted-tbn0.gstatic.com/imagesq=tbn:ANd9GcRzNCD2kbQVXobhImQe5kDUs8WJz8ulim191Q&s",
-  },
 ];
 
 const ORBIT_SOURCES = [

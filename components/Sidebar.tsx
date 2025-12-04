@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
     >
       <div className={`${collapsed ? "p-4" : "p-6"} border-b border-slate-800 space-y-3`}>
         <h1
-          className={`text-xl font-black tracking-tight bg-gradient-to-r from-blue-400 to-teal-300 bg-clip-text text-transparent uppercase ${collapsed ? "text-center" : ""}`}
+          className={`text-xl font-black tracking-tight bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent uppercase ${collapsed ? "text-center" : ""}`}
         >
           {collapsed ? "A" : "AUBE"}
         </h1>
