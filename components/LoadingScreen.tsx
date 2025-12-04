@@ -40,13 +40,19 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           </p>
         </div>
 
-        <div className="flex items-center space-x-3 text-xs font-bold tracking-wide text-slate-300">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-bold tracking-wide text-slate-300">
           <span className="h-2 w-2 rounded-full bg-lime-400 animate-ping"></span>
           <span>France Travail</span>
-          <span className="h-2 w-2 rounded-full bg-sky-400 animate-ping [animation-delay:0.2s]"></span>
+          <span className="h-2 w-2 rounded-full bg-sky-400 animate-ping [animation-delay:0.15s]"></span>
           <span>Insee</span>
-          <span className="h-2 w-2 rounded-full bg-amber-300 animate-ping [animation-delay:0.4s]"></span>
+          <span className="h-2 w-2 rounded-full bg-amber-300 animate-ping [animation-delay:0.3s]"></span>
           <span>DataNormandie</span>
+          <span className="h-2 w-2 rounded-full bg-purple-300 animate-ping [animation-delay:0.45s]"></span>
+          <span>DARES</span>
+          <span className="h-2 w-2 rounded-full bg-emerald-300 animate-ping [animation-delay:0.6s]"></span>
+          <span>Data Emploi</span>
+          <span className="h-2 w-2 rounded-full bg-rose-300 animate-ping [animation-delay:0.75s]"></span>
+          <span>Melodie</span>
         </div>
       </div>
     </div>
