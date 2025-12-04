@@ -1192,6 +1192,36 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           </div>
         </div>
       </section>
+      {/* ------------------- SECTION 8: PREMIERS SIGNAUX ------------------- */}
+      <section className="relative px-6 md:px-12 py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white w-full overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -left-10 top-10 w-64 h-64 rounded-full bg-orange-500/20 blur-3xl"></div>
+          <div className="absolute right-0 -bottom-16 w-72 h-72 rounded-full bg-sky-400/20 blur-3xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.04),transparent_40%),radial-gradient(circle_at_70%_70%,rgba(255,255,255,0.06),transparent_45%)]"></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+          <div className="space-y-4 max-w-3xl">
+            <h3 className="text-4xl md:text-5xl font-extrabold leading-tight">
+              Les premiers signaux apparaissent.
+            </h3>
+            <p className="text-lg text-slate-200 max-w-2xl">
+              Vous avez le temps d'agir intelligemment.
+            </p>
+          </div>
+          <div className="flex flex-col items-start md:items-end gap-4">
+            <button
+              onClick={onEnter}
+              className="group relative overflow-hidden px-8 py-4 rounded-full bg-white text-slate-900 font-semibold shadow-xl shadow-slate-900/30 hover:-translate-y-0.5 transition-all"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <span className="relative flex items-center gap-3">
+                Ouvrir le Dashboard
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 pt-12 overflow-hidden">
         <div className="max-w-[96rem] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start text-xs font-bold uppercase tracking-widest text-slate-400 z-10 relative mb-12">
