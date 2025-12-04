@@ -1076,42 +1076,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
           </div>
         </div>
       </section>
-      {/* ------------------- SECTION 6: SPONSORS ------------------- */}
-      <section
-        id="sponsors"
-        className="px-6 md:px-12 py-16 bg-white w-full border-t border-slate-100"
-      >
-        <style>{`
-          @keyframes sponsor-marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}</style>
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="relative overflow-hidden py-4">
-            <div
-              className="flex items-center gap-12 min-w-full"
-              style={{ animation: "sponsor-marquee 28s linear infinite" }}
-            >
-              {[...SPONSOR_LOGOS, ...SPONSOR_LOGOS].map((logo, idx) => (
-                <div
-                  key={`${logo.name}-${idx}`}
-                  className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
-                >
-                  <img
-                    src={logo.url}
-                    alt={logo.name}
-                    className="h-12 w-auto object-contain grayscale"
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white via-white/60 to-transparent"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white via-white/60 to-transparent"></div>
-          </div>
-        </div>
-      </section>
-      {/* ------------------- SECTION 7: EQUIPE ARQ ------------------- */}
+      {/* ------------------- SECTION 6: EQUIPE ARQ ------------------- */}
       <section
         id="team"
         className="px-6 md:px-12 py-32 bg-slate-50 w-full text-slate-900 border-t border-slate-200"
@@ -1189,6 +1154,41 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter }) => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* ------------------- SECTION 7: SPONSORS ------------------- */}
+      <section
+        id="sponsors"
+        className="px-6 md:px-12 py-16 bg-white w-full border-t border-slate-100"
+      >
+        <style>{`
+          @keyframes sponsor-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="relative overflow-hidden py-4">
+            <div
+              className="flex items-center gap-12 min-w-full"
+              style={{ animation: "sponsor-marquee 28s linear infinite" }}
+            >
+              {[...SPONSOR_LOGOS, ...SPONSOR_LOGOS].map((logo, idx) => (
+                <div
+                  key={`${logo.name}-${idx}`}
+                  className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
+                >
+                  <img
+                    src={logo.url}
+                    alt={logo.name}
+                    className="h-12 w-auto object-contain grayscale"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white via-white/60 to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white via-white/60 to-transparent"></div>
           </div>
         </div>
       </section>
