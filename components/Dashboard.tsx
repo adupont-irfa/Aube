@@ -45,6 +45,7 @@ const Dashboard: React.FC = () => {
     .filter((entry) => entry.tension > 1.5)
     .sort((a, b) => b.tension - a.tension)
     .slice(0, 6); // Top zones > 1.5 (moyenne)
+  const today = new Date().toLocaleDateString("fr-FR");
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -58,9 +59,9 @@ const Dashboard: React.FC = () => {
       <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h3 className="text-lg font-bold text-slate-800">Synthese des Predictions</h3>
+            <h3 className="text-lg font-bold text-slate-800">Synthèse des prédictions</h3>
             <p className="text-sm text-slate-500">
-              Agregation des donnees presentes dans l'onglet Predictions (vue d'ensemble).
+              Agrégation des données presentes dans l'onglet Prédictions.
             </p>
           </div>
           <div className="text-right">
@@ -76,7 +77,7 @@ const Dashboard: React.FC = () => {
               <p className="text-2xl font-bold text-slate-900">{totalPredictions}</p>
               <Activity className="text-slate-500" size={20} />
             </div>
-            <p className="text-xs text-slate-400">Metiers / zones suivis</p>
+            <p className="text-xs text-slate-400">Métiers / zones suivis</p>
           </div>
           <div className="p-4 bg-red-50 rounded-lg border border-red-100">
             <p className="text-xs font-semibold text-red-600 uppercase">En hausse</p>
@@ -92,7 +93,7 @@ const Dashboard: React.FC = () => {
               <p className="text-2xl font-bold text-green-700">{trendCounts.down}</p>
               <TrendingDown className="text-green-600" size={20} />
             </div>
-            <p className="text-xs text-green-500">Tension qui se detend</p>
+            <p className="text-xs text-green-500">Tension qui se détend</p>
           </div>
           <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
             <p className="text-xs font-semibold text-slate-600 uppercase">Stables</p>
@@ -143,61 +144,61 @@ const Dashboard: React.FC = () => {
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Metiers en Tension Critique</p>
+              <p className="text-sm font-medium text-slate-500">Métiers en tension critique</p>
               <h3 className="text-3xl font-bold text-red-600 mt-2">{criticalCount}</h3>
             </div>
             <div className="p-3 bg-red-50 rounded-lg">
               <AlertTriangle className="text-red-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Prevision +6 mois</p>
+          <p className="text-xs text-slate-400 mt-2">Prévision +6 mois</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Confiance Modele (Ensemble)</p>
+              <p className="text-sm font-medium text-slate-500">Confiance du modèle</p>
               <h3 className="text-3xl font-bold text-blue-600 mt-2">{avgConfidence}%</h3>
             </div>
             <div className="p-3 bg-blue-50 rounded-lg">
               <Activity className="text-blue-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Ponderation: LSTM 60% / SARIMA 40%</p>
+          <p className="text-xs text-slate-400 mt-2">Pondération: LSTM 60% / SARIMA 40%</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Zones d'Emploi Suivies</p>
+              <p className="text-sm font-medium text-slate-500">Zones d'emploi suivies</p>
               <h3 className="text-3xl font-bold text-slate-800 mt-2">24</h3>
             </div>
             <div className="p-3 bg-slate-100 rounded-lg">
               <Users className="text-slate-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Couverture Region Normandie</p>
+          <p className="text-xs text-slate-400 mt-2">Couverture région Normandie</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Tendance Globale</p>
+              <p className="text-sm font-medium text-slate-500">Tendance globale</p>
               <h3 className="text-3xl font-bold text-orange-500 mt-2">+12%</h3>
             </div>
             <div className="p-3 bg-orange-50 rounded-lg">
               <TrendingUp className="text-orange-600" size={24} />
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-2">Demande vs Trimestre dernier</p>
+          <p className="text-xs text-slate-400 mt-2">Demande vs trimestre dernier</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <h3 className="text-lg font-bold text-slate-800 mb-6">Top Zones en Tension (Score &gt; 1.5)</h3>
+          <h3 className="text-lg font-bold text-slate-800 mb-6">Top zones en tension (Score &gt; 1.5)</h3>
           <p className="text-xs text-slate-500 mb-4">
-            Moyenne des tensions prevues par zone a partir des donnees de l'onglet Predictions.
+            Moyenne des tensions prévues par zone a partir des données de l'onglet Prédictions.
           </p>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -220,26 +221,21 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <h3 className="text-lg font-bold text-slate-800 mb-4">Derniere Mise a Jour</h3>
+          <h3 className="text-lg font-bold text-slate-800 mb-4">Dernière mise à jour</h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
-              <span className="text-slate-500 text-sm">France Travail API</span>
-              <span className="text-green-600 text-xs font-semibold px-2 py-1 bg-green-50 rounded-full">En temps reel</span>
+              <span className="text-slate-500 text-sm">France Travail</span>
+              <span className="text-slate-700 text-xs font-semibold px-2 py-1 bg-slate-100 rounded-full">{today}</span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
-              <span className="text-slate-500 text-sm">Dares Indicateurs</span>
-              <span className="text-orange-600 text-xs font-semibold px-2 py-1 bg-orange-50 rounded-full">Lag 90j (Estime)</span>
+              <span className="text-slate-500 text-sm">DARES</span>
+              <span className="text-slate-700 text-xs font-semibold px-2 py-1 bg-slate-100 rounded-full">{today}</span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100">
-              <span className="text-slate-500 text-sm">INSEE Stats</span>
-              <span className="text-slate-600 text-xs font-semibold px-2 py-1 bg-slate-100 rounded-full">Annuel</span>
+              <span className="text-slate-500 text-sm">INSEE</span>
+              <span className="text-slate-700 text-xs font-semibold px-2 py-1 bg-slate-100 rounded-full">{today}</span>
             </div>
-            <div className="mt-6 p-4 bg-slate-50 rounded-lg">
-              <p className="text-xs text-slate-500 mb-2 font-semibold">NOTE TECHNIQUE</p>
-              <p className="text-xs text-slate-400">
-                Les indicateurs Dares sont interpoles mensuellement pour alimenter le modele Ensemble (Voting).
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
