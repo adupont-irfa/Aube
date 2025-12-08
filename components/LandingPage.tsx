@@ -736,7 +736,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
               <div className="relative w-full h-full bg-white rounded-full flex items-center justify-center shadow-2xl shadow-orange-900/5 ring-8 ring-slate-50">
                 <div className="absolute inset-3 rounded-full bg-gradient-to-tr from-[#FF2D20] to-[#F97316] opacity-15 blur-lg animate-[orbital-pulse-core_2.8s_ease-in-out_infinite]"></div>
                 <div className="relative w-16 h-16 bg-gradient-to-tr from-[#FF2D20] to-[#F97316] rounded-full flex items-center justify-center animate-[orbital-pulse-core_2.8s_ease-in-out_infinite]">
-                  <Sun size={32} className="text-white" />
+                  <img src="/logo_white.svg" alt="Aube" className="w-10 h-10" />
                 </div>
               </div>
             </div>
