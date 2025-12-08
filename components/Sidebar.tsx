@@ -12,7 +12,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
   // Menu lateral qui gere le changement d'onglet dans l'application.
   const menuItems = [
     { id: "dashboard", label: "Vue d'ensemble", icon: LayoutDashboard },
-    { id: "predictions", label: "Predictions (6 mois)", icon: FileText },
+    { id: "predictions", label: "Predictions", icon: FileText },
     { id: "models", label: "Performance Modeles", icon: BarChart2 },
     { id: "assistant", label: "Assistant IA", icon: Bot },
   ];
