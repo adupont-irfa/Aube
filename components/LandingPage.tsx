@@ -702,7 +702,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
           <div className="relative w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl shadow-slate-200 border border-slate-100 group">
             <iframe
               className="absolute inset-0 w-full h-full object-cover"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQmute=1"
+              src="https://www.youtube.com/embed/J-cDr27eVC0?mute=1"
               title="Présentation du projet AUBE"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -776,7 +776,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
                 <br /> Nous les rendons lisibles et actionnables.
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed font-normal">
-                La solution Aube s'appuie sur un écosystème de données publiques et d'APIs institutionnelles, sélectionnées pour leur pertinence thématique, leur granularité géographique et leur fiabilité. L'objectif est de croiser des sources complémentaires – offres d'emploi, compétences, démographie, stocks d'emplois, formation, accessibilité territoriale – afin de construire un modèle prédictif robuste et territorialisé des tensions emploi‑formation.
+                La solution Aube s'appuie sur un écosystème de données publiques et d'APIs institutionnelles, sélectionnées pour leur pertinence thématique, leur granularité géographique et leur fiabilité. L'objectif est de croiser des sources complémentaires, offres d'emploi, compétences, démographie, stocks d'emplois, formation, accessibilité territoriale, afin de construire un modèle prédictif robuste et territorialisé des tensions emploi‑formation.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-y-10 gap-x-8 pt-8 border-t border-slate-100">
@@ -851,7 +851,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
               Parce que les indicateurs actuels montrent les tensions trop tard.
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
-              Les indicateurs habituellement utilisés pour évaluer la situation du marché du travail — tels que le taux de chômage, le volume des offres d’emploi ou les déclarations officielles de tensions sur certains métiers — fournissent uniquement une lecture rétrospective. Ils repèrent les tensions et dysfonctionnements une fois que ceux-ci sont déjà bien ancrés dans le territoire.
+              Les indicateurs habituellement utilisés pour évaluer la situation du marché du travail, tels que le taux de chômage, le volume des offres d’emploi ou les déclarations officielles de tensions sur certains métiers, fournissent uniquement une lecture rétrospective. Ils repèrent les tensions et dysfonctionnements une fois que ceux-ci sont déjà bien ancrés dans le territoire.
             </p>
             <div className="pt-4">
               <div className="flex items-center gap-4 text-sm font-semibold text-slate-500">
