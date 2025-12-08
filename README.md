@@ -1,6 +1,6 @@
-# Aube - Prédiction des tensions RH en Normandie
+# Aube - Prédiction des tensions en Normandie
 
-Application React/Vite qui visualise les tensions de recrutement par zone d'emploi : tableau de bord, prédictions détaillées, analyse de modèles et landing page immersive. Un assistant local aide à parcourir la méthodologie (SARIMA, LSTM, ensemble) sans appel externe.
+Application React/Vite qui visualise les tensions de recrutement par zone d'emploi : tableau de bord, prédictions détaillées, analyse de modèles et landing page immersive. Un assistant local aide à parcourir la méthodologie (SARIMA, LSTM).
 
 ## Fonctionnalités principales
 - Tableau de bord synthétique (zones en tension, confiance des modèles, historique d'actualisation).
