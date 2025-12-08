@@ -64,8 +64,8 @@ const Predictions: React.FC = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Predictions a 6 Mois</h2>
-          <p className="text-slate-500 mt-1">Projection des tensions par metier et zone d'emploi</p>
+          <h2 className="text-2xl font-bold text-slate-800">Prédictions à 6 Mois</h2>
+          <p className="text-slate-500 mt-1">Projection des tensions par métier et zone d'emploi</p>
         </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
@@ -174,7 +174,7 @@ const Predictions: React.FC = () => {
           </table>
         </div>
         {sorted.length === 0 && (
-          <div className="p-8 text-center text-slate-400">Aucun resultat trouve pour "{searchTerm}"</div>
+          <div className="p-8 text-center text-slate-400">Aucun résultat trouve pour "{searchTerm}"</div>
         )}
       </div>
     </div>
