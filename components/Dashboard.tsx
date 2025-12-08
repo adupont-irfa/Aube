@@ -1,7 +1,7 @@
 import React from "react";
 import { MOCK_PREDICTIONS } from "../constants";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import { AlertTriangle, TrendingUp, Users, Activity } from "lucide-react";
+import { AlertTriangle, TrendingUp, TrendingDown, Users, Activity, Minus } from "lucide-react";
 
 const Dashboard: React.FC = () => {
   // Vue principale qui synthetise les tensions et indicateurs clefs sur 6 mois.
@@ -9,17 +9,136 @@ const Dashboard: React.FC = () => {
   const avgConfidence = (
     (MOCK_PREDICTIONS.reduce((acc, curr) => acc + curr.modelConfidence, 0) / MOCK_PREDICTIONS.length) * 100
   ).toFixed(1);
+  const totalPredictions = MOCK_PREDICTIONS.length;
+  const avgPredictedTension = (
+    MOCK_PREDICTIONS.reduce((acc, curr) => acc + curr.predictedTension6Months, 0) / totalPredictions
+  ).toFixed(2);
+  const trendCounts = MOCK_PREDICTIONS.reduce<{ up: number; down: number; stable: number }>(
+    (acc, curr) => {
+      acc[curr.trend] += 1;
+      return acc;
+    },
+    { up: 0, down: 0, stable: 0 }
+  );
+  const topPredictions = [...MOCK_PREDICTIONS]
+    .sort((a, b) => b.predictedTension6Months - a.predictedTension6Months)
+    .slice(0, 3);
 
-  const chartData = MOCK_PREDICTIONS.map((p) => ({
-    name: p.zone,
-    tension: p.predictedTension6Months,
-    job: p.jobTitle,
-  }))
+  const aggregatedByZone = MOCK_PREDICTIONS.reduce<Record<string, { zone: string; sum: number; count: number }>>(
+    (acc, curr) => {
+      if (!acc[curr.zone]) {
+        acc[curr.zone] = { zone: curr.zone, sum: 0, count: 0 };
+      }
+      acc[curr.zone].sum += curr.predictedTension6Months;
+      acc[curr.zone].count += 1;
+      return acc;
+    },
+    {}
+  );
+
+  const chartData = Object.values(aggregatedByZone)
+    .map((zone) => ({
+      zone: zone.zone,
+      tension: Number((zone.sum / zone.count).toFixed(2)),
+      count: zone.count,
+    }))
+    .filter((entry) => entry.tension > 1.5)
     .sort((a, b) => b.tension - a.tension)
-    .slice(0, 6); // Top 6 critical
+    .slice(0, 6); // Top zones > 1.5 (moyenne)
 
   return (
     <div className="space-y-6 animate-fade-in">
+      <div className="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+        <p className="text-sm text-slate-600">
+          Collecte et analyse automatique des offres d'emploi normandes avec extraction semantique des competences
+          requises.
+        </p>
+      </div>
+
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-bold text-slate-800">Synthese des Predictions</h3>
+            <p className="text-sm text-slate-500">
+              Agregation des donnees presentes dans l'onglet Predictions (vue d'ensemble).
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-slate-500 uppercase">Tension moyenne prevue</p>
+            <p className="text-2xl font-bold text-blue-600">{avgPredictedTension}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <p className="text-xs font-semibold text-slate-500 uppercase">Entrees total</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-2xl font-bold text-slate-900">{totalPredictions}</p>
+              <Activity className="text-slate-500" size={20} />
+            </div>
+            <p className="text-xs text-slate-400">Metiers / zones suivis</p>
+          </div>
+          <div className="p-4 bg-red-50 rounded-lg border border-red-100">
+            <p className="text-xs font-semibold text-red-600 uppercase">En hausse</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-2xl font-bold text-red-700">{trendCounts.up}</p>
+              <TrendingUp className="text-red-600" size={20} />
+            </div>
+            <p className="text-xs text-red-500">Signal de tension</p>
+          </div>
+          <div className="p-4 bg-green-50 rounded-lg border border-green-100">
+            <p className="text-xs font-semibold text-green-600 uppercase">En baisse</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-2xl font-bold text-green-700">{trendCounts.down}</p>
+              <TrendingDown className="text-green-600" size={20} />
+            </div>
+            <p className="text-xs text-green-500">Tension qui se detend</p>
+          </div>
+          <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <p className="text-xs font-semibold text-slate-600 uppercase">Stables</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-2xl font-bold text-slate-800">{trendCounts.stable}</p>
+              <Minus className="text-slate-500" size={20} />
+            </div>
+            <p className="text-xs text-slate-500">Variation neutre</p>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <p className="text-xs text-slate-500 uppercase mb-3">Top 3 tensions previsionnelles</p>
+          <div className="space-y-3">
+            {topPredictions.map((p) => (
+              <div
+                key={p.id}
+                className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-100"
+              >
+                <div>
+                  <p className="text-sm font-semibold text-slate-800">{p.jobTitle}</p>
+                  <p className="text-xs text-slate-500">
+                    {p.zone} - {p.romeCode}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-bold text-slate-900">{p.predictedTension6Months}</p>
+                  <div className="flex items-center justify-end space-x-2 mt-1">
+                    {p.trend === "up" ? (
+                      <TrendingUp className="text-red-500" size={16} />
+                    ) : p.trend === "down" ? (
+                      <TrendingDown className="text-green-500" size={16} />
+                    ) : (
+                      <Minus className="text-slate-400" size={16} />
+                    )}
+                    <span className="text-xs text-slate-500 capitalize">
+                      {p.trend === "up" ? "hausse" : p.trend === "down" ? "baisse" : "stable"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between">
@@ -77,6 +196,9 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <h3 className="text-lg font-bold text-slate-800 mb-6">Top Zones en Tension (Score &gt; 1.5)</h3>
+          <p className="text-xs text-slate-500 mb-4">
+            Moyenne des tensions prevues par zone a partir des donnees de l'onglet Predictions.
+          </p>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} layout="vertical" margin={{ left: 20 }}>
