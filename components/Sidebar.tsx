@@ -21,14 +21,18 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
       className={`${collapsed ? "w-20" : "w-64"} bg-slate-900 text-white h-screen fixed left-0 top-0 flex flex-col shadow-xl z-10 transition-all duration-300`}
     >
       <div className={`${collapsed ? "p-4" : "p-6"} border-b border-slate-800 space-y-3`}>
-        <h1
-          className={`text-xl font-black tracking-tight bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent uppercase ${collapsed ? "text-center" : ""}`}
-        >
-          {collapsed ? "A" : "AUBE"}
-        </h1>
-        {!collapsed && (
-          <p className="text-xs font-semibold tracking-wide text-slate-400 mt-1">Éclairer l'avenir des territoires</p>
-        )}
+        <div className={`flex items-center ${collapsed ? "justify-center" : "space-x-3"}`}>
+          <img
+            src="/logo_white.svg"
+            alt="Aube"
+            className={`${collapsed ? "w-8 h-8" : "w-10 h-10"} rounded-xl`}
+          />
+          {!collapsed && (
+            <div>
+              <p className="text-lg font-bold tracking-tight text-white">AUBE</p>
+            </div>
+          )}
+        </div>
         <button
           onClick={onToggleSidebar}
           aria-label={collapsed ? "Agrandir la barre laterale" : "Reduire la barre laterale"}

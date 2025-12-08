@@ -605,9 +605,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
             className="flex items-center space-x-3 group cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="p-2 bg-gradient-to-tr from-[#FF2D20] to-[#F97316] rounded-lg shadow-lg shadow-orange-500/20">
-              <Sun size={20} className="text-white" />
-            </div>
+            <img src="/logo_black.svg" alt="Aube" className="w-10 h-10" />
             <div className="flex flex-col leading-none">
               <span className="text-2xl font-extrabold tracking-tight text-slate-900">
                 AUBE
