@@ -8,7 +8,7 @@ const Assistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'model',
-      text: "Bonjour ! Je suis l'assistant expert du projet de pr?diction des tensions RH en Normandie. Posez-moi des questions sur la m?thodologie (SARIMA, LSTM), les sources de donn?es ou les r?sultats.",
+      text: "Bonjour ! Je suis l'assistant IA en prédiction des tensions de la Normandie. Posez-moi des questions sur la méthodologie (SARIMA, LSTM), les sources de données ou les résultats.",
       timestamp: new Date()
     }
   ]);
@@ -16,7 +16,7 @@ const Assistant: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    // Force le d?filement en bas du fil apr?s l'ajout d'un message.
+    // Force le défilement en bas du fil aprés l'ajout d'un message.
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -25,7 +25,7 @@ const Assistant: React.FC = () => {
   }, [messages]);
 
   const handleSend = () => {
-    // Simule une r?ponse locale sans appel r?seau.
+    // Simule une réponse locale sans appel réseau.
     if (!input.trim()) return;
 
     const userMsg: ChatMessage = { role: 'user', text: input, timestamp: new Date() };
@@ -36,7 +36,7 @@ const Assistant: React.FC = () => {
     setTimeout(() => {
       const botMsg: ChatMessage = {
         role: 'model',
-        text: "Mode hors-ligne : je synth?tise les ?l?ments connus (SARIMA, LSTM, donn?es Dares/INSEE) sans appel externe.",
+        text: "Mode hors-ligne : je synthètise les élèments connus (SARIMA, LSTM, donn?es Dares/INSEE) sans appel externe.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botMsg]);
@@ -60,8 +60,8 @@ const Assistant: React.FC = () => {
                 <Sparkles size={20} className="text-blue-600" />
             </div>
             <div>
-                <h3 className="font-bold text-slate-800">Assistant Expert Data Science</h3>
-                <p className="text-xs text-slate-500">Mode hors-ligne, r?ponses internes</p>
+                <h3 className="font-bold text-slate-800">Assistant expert data science</h3>
+                <p className="text-xs text-slate-500">Mode hors-ligne, réponses internes</p>
             </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const Assistant: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Posez une question sur le mod?le LSTM, les donn?es Dares..."
+            placeholder="Posez une question sur le mod?le LSTM, les données Dares..."
             className="flex-1 p-3 pr-12 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
           />
           <button 

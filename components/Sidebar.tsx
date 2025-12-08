@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
           {collapsed ? "A" : "AUBE"}
         </h1>
         {!collapsed && (
-          <p className="text-xs font-semibold tracking-wide text-slate-400 mt-1">Predictions de Tensions</p>
+          <p className="text-xs font-semibold tracking-wide text-slate-400 mt-1">Éclairer l'avenir des territoires</p>
         )}
         <button
           onClick={onToggleSidebar}

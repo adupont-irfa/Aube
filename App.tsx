@@ -67,13 +67,13 @@ const App: React.FC = () => {
           <header className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {activeTab === "dashboard" && "Tableau de Bord"}
-                {activeTab === "predictions" && "Detail des Predictions"}
-                {activeTab === "models" && "Analyse des Modeles"}
-                {activeTab === "assistant" && "Assistant IA Expert"}
+                {activeTab === "dashboard" && "Tableau de bord"}
+                {activeTab === "predictions" && "Détail des prédictions"}
+                {activeTab === "models" && "Analyse des modèles"}
+                {activeTab === "assistant" && "Assistant IA"}
               </h1>
               <p className="text-slate-500 text-sm font-medium mt-1">
-                Region Normandie - Previsions a 6 mois
+                Région Normandie - Prévisions à 6 mois
               </p>
             </div>
             <div className="flex items-center space-x-2">

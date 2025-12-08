@@ -61,18 +61,18 @@ const Dashboard: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold text-slate-800">Synthèse des prédictions</h3>
             <p className="text-sm text-slate-500">
-              Agrégation des données presentes dans l'onglet Prédictions.
+              Agrégation des données présentes dans l'onglet prédictions.
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-slate-500 uppercase">Tension moyenne prevue</p>
+            <p className="text-xs text-slate-500 uppercase">Tension moyenne prévue</p>
             <p className="text-2xl font-bold text-blue-600">{avgPredictedTension}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
           <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
-            <p className="text-xs font-semibold text-slate-500 uppercase">Entrees total</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase">Entrées total</p>
             <div className="flex items-center justify-between mt-2">
               <p className="text-2xl font-bold text-slate-900">{totalPredictions}</p>
               <Activity className="text-slate-500" size={20} />
@@ -106,7 +106,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="mt-6">
-          <p className="text-xs text-slate-500 uppercase mb-3">Top 3 tensions previsionnelles</p>
+          <p className="text-xs text-slate-500 uppercase mb-3">Top 3 tensions prévisionnelles</p>
           <div className="space-y-3">
             {topPredictions.map((p) => (
               <div
@@ -198,7 +198,7 @@ const Dashboard: React.FC = () => {
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
           <h3 className="text-lg font-bold text-slate-800 mb-6">Top zones en tension (Score &gt; 1.5)</h3>
           <p className="text-xs text-slate-500 mb-4">
-            Moyenne des tensions prévues par zone a partir des données de l'onglet Prédictions.
+            Moyenne des tensions prévues par zone a partir des données de l'onglet prédictions.
           </p>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
