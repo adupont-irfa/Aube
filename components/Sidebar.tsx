@@ -13,7 +13,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
   const menuItems = [
     { id: "dashboard", label: "Vue d'ensemble", icon: LayoutDashboard },
     { id: "predictions", label: "Predictions", icon: FileText },
-    { id: "models", label: "Performance Modeles", icon: BarChart2 },
     { id: "assistant", label: "Assistant IA", icon: Bot },
   ];
 
@@ -73,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, collapsed, o
         {!collapsed && (
           <div className="flex items-center space-x-3 text-slate-400 px-4 py-2">
             <Settings size={18} />
-            <span className="text-sm font-medium">v1.0.4 (Prod)</span>
+            <span className="text-sm font-medium">v1.0.2 (Prod)</span>
           </div>
         )}
       </div>
