@@ -848,10 +848,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnter, onOpenManifest }) =>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2 space-y-6">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Parce que les indicateurs actuels montrent les tensions trop tard.
+              Parce que les indicateurs actuels sont surtout descriptifs.
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed font-normal">
-              Les indicateurs habituellement utilisés pour évaluer la situation du marché du travail — tels que le taux de chômage, le volume des offres d’emploi ou les déclarations officielles de tensions sur certains métiers — fournissent uniquement une lecture rétrospective. Ils repèrent les tensions et dysfonctionnements une fois que ceux-ci sont déjà bien ancrés dans le territoire.
+              Aujourd’hui, les acteurs disposent déjà de nombreux indicateurs sur le marché du travail : taux de chômage, offres et demandes d’emploi, indicateurs de tension, enquêtes BMO sur les intentions de recrutement à un an, ou encore exercices de prospective comme “Les métiers en 2030”.
+              Ces outils apportent une vision précieuse, mais ils restent soit surtout descriptifs et rétrospectifs, soit conçus pour le moyen-long terme.
+              Ce qui manque encore, ce sont des outils opérationnels capables de transformer ces données en signaux d’alerte précoces, à 6–12 mois, au niveau fin des métiers et des territoires.
+              C’est précisément ce que vise notre solution : détecter en amont les évolutions probables des tensions de recrutement et les rendre actionnables pour les acteurs locaux de l’emploi et de la formation.
             </p>
             <div className="pt-4">
               <div className="flex items-center gap-4 text-sm font-semibold text-slate-500">
